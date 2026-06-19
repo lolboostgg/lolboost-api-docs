@@ -1,0 +1,14 @@
+---
+title: Item sync
+description: Recommended sync workflow for item offers.
+---
+
+# Item sync
+
+Items follow the same sync concept as accounts. Use `external_id` for reliable mapping.
+
+```text
+Create item in your system, create item on LoLBoost
+Sold on LoLBoost, receive item.sold webhook
+Sold outside LoLBoost, archive item on LoLBoost
+```
