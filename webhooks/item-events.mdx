@@ -1,0 +1,40 @@
+---
+title: Item events
+description: Item webhook payloads.
+---
+
+# Item events
+
+## item.created
+
+```json
+{
+  "event": "item.created",
+  "external_id": "item-123",
+  "lolboost_item_id": 55,
+  "created_at": "2026-06-19 15:30:00"
+}
+```
+
+## item.sold
+
+```json
+{
+  "event": "item.sold",
+  "external_id": "item-123",
+  "lolboost_item_id": 55,
+  "quantity": 1,
+  "sold_at": "2026-06-19 15:30:00"
+}
+```
+
+## item.archived
+
+```json
+{
+  "event": "item.archived",
+  "external_id": "item-123",
+  "lolboost_item_id": 55,
+  "archived_at": "2026-06-19 15:30:00"
+}
+```
