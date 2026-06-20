@@ -58,6 +58,12 @@
             ]
           },
           {
+            "group": "Community",
+            "pages": [
+              "help/discord-community"
+            ]
+          },
+          {
             "group": "Trust & legal",
             "pages": [
               "help/is-lolboost-legit",
