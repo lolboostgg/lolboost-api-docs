@@ -1,0 +1,6 @@
+Mintlify live check and update
+
+Changed api-reference/openapi.json servers[0].url from https://new.lolboost.gg to https://lolboost.gg
+Changed server description to LoLBoost live environment
+Changed Seller Area links from /seller-area/auth/login to /seller-area/api in docs.json and essentials/overview.mdx
+No other new.lolboost.gg references found after update

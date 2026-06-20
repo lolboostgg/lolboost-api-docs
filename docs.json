@@ -138,7 +138,7 @@
       },
       {
         "label": "Seller Area",
-        "href": "https://lolboost.gg/seller-area/auth/login"
+        "href": "https://lolboost.gg/seller-area/api"
       },
       {
         "label": "Seller API",
