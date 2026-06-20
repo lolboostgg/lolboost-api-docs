@@ -1,22 +1,52 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "LoLBoost Partner API",
+  "name": "LoLBoost",
+  "logo": {
+    "light": "https://lolboost.gg/public/assets/website/images/logo.svg",
+    "dark": "https://lolboost.gg/public/assets/website/images/logo.svg"
+  },
+  "favicon": "https://lolboost.gg/public/assets/website/images/logo.svg",
   "colors": {
     "primary": "#7c3aed",
     "light": "#8b5cf6",
     "dark": "#a78bfa"
   },
-  "favicon": "/favicon.ico",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Help Center",
+        "groups": [
+          {
+            "group": "Popular topics",
+            "pages": [
+              "index",
+              "help/order-problem",
+              "help/refunds-warranties",
+              "help/account-safety"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Partner Center",
+        "groups": [
+          {
+            "group": "Selling on LoLBoost",
+            "pages": [
+              "partner-center/start-selling",
+              "partner-center/seller-guide",
+              "partner-center/payouts"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Partner API",
         "groups": [
           {
             "group": "Get started",
             "pages": [
-              "index",
               "essentials/authentication",
               "essentials/testing",
               "essentials/errors"
@@ -55,17 +85,21 @@
     "links": [
       {
         "label": "LoLBoost",
-        "href": "https://new.lolboost.gg"
+        "href": "https://lolboost.gg"
       },
       {
         "label": "Seller Area",
         "href": "https://new.lolboost.gg/seller"
+      },
+      {
+        "label": "Partner API",
+        "href": "/essentials/authentication"
       }
     ]
   },
   "footer": {
     "socials": {
-      "website": "https://new.lolboost.gg"
+      "website": "https://lolboost.gg"
     }
   }
 }
