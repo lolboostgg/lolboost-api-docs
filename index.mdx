@@ -1,23 +1,38 @@
 ---
-title: Introduction
-description: Sync seller inventory with LoLBoost.
+title: Help Center
+description: Guides for buyers, sellers, and API partners.
 ---
 
-# LoLBoost Partner API
+# What do you need help with?
 
-Use the Partner API to keep your seller inventory synchronized with LoLBoost.
+Self service guides for buyers, partnered sellers, and API partners. Search the docs or start with a topic below.
 
-<Cards>
-  <Card title="Accounts" icon="gamepad" href="/api-reference/accounts/list-account-offers">Create, update, archive and bulk remove account offers.</Card>
-  <Card title="Items" icon="gift" href="/api-reference/items/list-item-offers">Sync item offers such as gifts, services or stock based products.</Card>
-  <Card title="Webhooks" icon="webhook" href="/webhooks/overview">Receive instant events when offers are created, archived or sold.</Card>
-</Cards>
-
-## Main sync flow
-
-```text
-Add in seller system, create on LoLBoost
-Sold on LoLBoost, webhook to seller system
-Sold outside LoLBoost, archive on LoLBoost by API
-Bulk stock update, bulk archive on LoLBoost
-```
+<CardGroup cols={3}>
+  <Card title="What you can do on LoLBoost" icon="circle-question" href="/help/order-problem">
+    Marketplace overview for buyers and sellers.
+  </Card>
+  <Card title="How to Buy" icon="cart-shopping" href="/help/order-problem">
+    Checkout, delivery, and what to expect after purchase.
+  </Card>
+  <Card title="Find the Right Offer" icon="magnifying-glass" href="/help/account-safety">
+    Search, filters, and how to compare listings.
+  </Card>
+  <Card title="Orders and Support" icon="life-ring" href="/help/order-problem">
+    Order issues, tickets, and what to include when you contact us.
+  </Card>
+  <Card title="Refunds and Warranties" icon="shield" href="/help/refunds-warranties">
+    Refund rules, warranty coverage, and how to file a claim.
+  </Card>
+  <Card title="Account Safety" icon="lock" href="/help/account-safety">
+    Usage terms and steps to secure accounts after purchase.
+  </Card>
+  <Card title="Start Selling" icon="store" href="/partner-center/start-selling">
+    How selling works and how to become a partner.
+  </Card>
+  <Card title="Seller Guide" icon="book-open" href="/partner-center/seller-guide">
+    Listings, orders, payouts, and seller policies.
+  </Card>
+  <Card title="Partner API" icon="terminal" href="/essentials/authentication">
+    Authentication, webhooks, and API reference for integrations.
+  </Card>
+</CardGroup>

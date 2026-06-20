@@ -1,21 +1,3 @@
-# LoLBoost Partner API Mintlify Docs
+# LoLBoost Mintlify Docs
 
-Upload this folder to a GitHub repository and connect it in Mintlify.
-
-Local preview:
-
-```bash
-npm i -g mintlify
-mint dev
-```
-
-Main files:
-
-```text
-docs.json
-api-reference/openapi.json
-index.mdx
-essentials/
-guides/
-webhooks/
-```
+Upload these files to the root of the GitHub repository connected to Mintlify.
