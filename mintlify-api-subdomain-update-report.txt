@@ -1,0 +1,19 @@
+Mintlify API URL update completed.
+
+Changed:
+- api-reference/openapi.json
+  - servers[0].url set to https://api.lolboost.gg
+  - all OpenAPI paths remain /api/v1/...
+
+Resulting playground URLs:
+- https://api.lolboost.gg/api/v1/accounts
+- https://api.lolboost.gg/api/v1/items
+
+Kept unchanged:
+- Main website links such as https://lolboost.gg
+- Seller Area link: https://lolboost.gg/seller-area/api
+- Logo and asset URLs on lolboost.gg
+
+Checked:
+- No remaining references to https://new.lolboost.gg
+- No remaining references to https://lolboost.gg/api
