@@ -32,17 +32,22 @@
     linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
 }
 
-.lb-hero-blob {
-  position: absolute;
+.lb-hero-illustration {
   z-index: 0;
-  border-radius: 9999px;
-  filter: blur(60px);
-  opacity: 0.5;
-  pointer-events: none;
+  opacity: 0.16;
 }
 
-.dark .lb-hero-blob {
-  opacity: 0.35;
+.dark .lb-hero-illustration {
+  opacity: 0.3;
+}
+
+.lb-hero-scrim {
+  z-index: 0;
+  background: radial-gradient(70% 75% at 50% 42%, rgba(250, 245, 255, 0.85) 0%, rgba(250, 245, 255, 0.55) 50%, rgba(250, 245, 255, 0.25) 100%);
+}
+
+.dark .lb-hero-scrim {
+  background: radial-gradient(70% 75% at 50% 42%, rgba(7, 6, 12, 0.8) 0%, rgba(7, 6, 12, 0.55) 50%, rgba(7, 6, 12, 0.3) 100%);
 }
 
 .lb-hero-content {

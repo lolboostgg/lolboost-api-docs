@@ -1,109 +1,1312 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "LoLBoost Partner API",
+    "title": "LoLBoost Seller API",
     "version": "1.0.0",
     "description": "Seller API for syncing account offers and item offers with LoLBoost."
   },
   "servers": [
-    { "url": "https://lolboost.gg", "description": "LoLBoost production" },
-    { "url": "https://new.lolboost.gg", "description": "LoLBoost staging" }
+    {
+      "url": "https://new.lolboost.gg",
+      "description": "LoLBoost new environment"
+    }
   ],
-  "security": [{ "BearerAuth": [] }],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
   "tags": [
-    { "name": "Accounts" },
-    { "name": "Items" },
-    { "name": "Webhooks" }
+    {
+      "name": "Accounts",
+      "description": "Create, list, update, archive and bulk remove account offers."
+    },
+    {
+      "name": "Items",
+      "description": "Create, list, update, archive and bulk remove item offers."
+    },
+    {
+      "name": "Webhooks",
+      "description": "Webhook payload examples for sync events."
+    }
   ],
   "paths": {
     "/api/v1/accounts": {
       "get": {
-        "tags": ["Accounts"],
-        "summary": "List accounts",
-        "operationId": "listAccounts",
-        "parameters": [
-          { "name": "filter[search]", "in": "query", "schema": { "type": "string" } },
-          { "name": "filter[external_id]", "in": "query", "schema": { "type": "string" } },
-          { "name": "filter[status]", "in": "query", "schema": { "type": "string", "enum": ["listed", "sold", "archived", "draft", "pending"] } },
-          { "name": "sort", "in": "query", "schema": { "type": "string", "example": "-updated_at" } },
-          { "name": "per_page", "in": "query", "schema": { "type": "integer", "default": 15, "maximum": 50 } }
+        "tags": [
+          "Accounts"
         ],
-        "responses": { "200": { "description": "Paginated accounts", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PaginatedAccounts" } } } }, "401": { "$ref": "#/components/responses/Unauthorized" } }
+        "summary": "List account offers",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Account"
+                      }
+                    },
+                    "meta": {
+                      "type": "object"
+                    },
+                    "links": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter[search]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[external_id]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[status]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "-updated_at"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "example": 15
+            }
+          }
+        ]
       },
       "post": {
-        "tags": ["Accounts"],
-        "summary": "Create account",
-        "operationId": "createAccount",
-        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AccountCreateRequest" } } } },
-        "responses": { "201": { "description": "Created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Account" } } } }, "422": { "$ref": "#/components/responses/ValidationError" } }
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Create account offer",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountCreateRequest"
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/accounts/{identifier}": {
       "get": {
-        "tags": ["Accounts"],
-        "summary": "Get account",
-        "operationId": "getAccount",
-        "parameters": [{ "name": "identifier", "in": "path", "required": true, "schema": { "type": "string" }, "description": "LoLBoost account ID or external_id" }],
-        "responses": { "200": { "description": "Account", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Account" } } } }, "404": { "$ref": "#/components/responses/NotFound" } }
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Get account offer",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "description": "LoLBoost ID or external_id",
+            "schema": {
+              "type": "string",
+              "example": "seller-account-123"
+            }
+          }
+        ]
       },
       "patch": {
-        "tags": ["Accounts"],
-        "summary": "Update account",
-        "operationId": "updateAccount",
-        "parameters": [{ "name": "identifier", "in": "path", "required": true, "schema": { "type": "string" } }],
-        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AccountUpdateRequest" } } } },
-        "responses": { "200": { "description": "Updated", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Account" } } } } }
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Update account offer",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountUpdateRequest"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "description": "LoLBoost ID or external_id",
+            "schema": {
+              "type": "string",
+              "example": "seller-account-123"
+            }
+          }
+        ]
       },
       "delete": {
-        "tags": ["Accounts"],
-        "summary": "Archive account",
-        "operationId": "deleteAccount",
-        "parameters": [{ "name": "identifier", "in": "path", "required": true, "schema": { "type": "string" } }],
-        "responses": { "200": { "description": "Archived", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ArchiveResponse" } } } } }
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Archive account offer",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "archived": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "description": "LoLBoost ID or external_id",
+            "schema": {
+              "type": "string",
+              "example": "seller-account-123"
+            }
+          }
+        ]
       }
     },
     "/api/v1/accounts/bulk-remove": {
       "post": {
-        "tags": ["Accounts"],
-        "summary": "Bulk archive accounts",
-        "operationId": "bulkRemoveAccounts",
-        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/BulkRemoveRequest" } } } },
-        "responses": { "200": { "description": "Bulk result", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/BulkRemoveResponse" } } } } }
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Bulk archive account offers",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkRemoveResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkRemoveRequest"
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/items": {
-      "get": { "tags": ["Items"], "summary": "List items", "operationId": "listItems", "responses": { "200": { "description": "Paginated items", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PaginatedItems" } } } } } },
-      "post": { "tags": ["Items"], "summary": "Create item", "operationId": "createItem", "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ItemCreateRequest" } } } }, "responses": { "201": { "description": "Created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Item" } } } } } }
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "List item offers",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Item"
+                      }
+                    },
+                    "meta": {
+                      "type": "object"
+                    },
+                    "links": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter[search]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[external_id]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter[status]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "-updated_at"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "example": 15
+            }
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Create item offer",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Item"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemCreateRequest"
+              }
+            }
+          }
+        }
+      }
     },
     "/api/v1/items/{identifier}": {
-      "get": { "tags": ["Items"], "summary": "Get item", "operationId": "getItem", "parameters": [{ "name": "identifier", "in": "path", "required": true, "schema": { "type": "string" } }], "responses": { "200": { "description": "Item", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Item" } } } } } },
-      "patch": { "tags": ["Items"], "summary": "Update item", "operationId": "updateItem", "parameters": [{ "name": "identifier", "in": "path", "required": true, "schema": { "type": "string" } }], "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ItemUpdateRequest" } } } }, "responses": { "200": { "description": "Updated" } } },
-      "delete": { "tags": ["Items"], "summary": "Archive item", "operationId": "deleteItem", "parameters": [{ "name": "identifier", "in": "path", "required": true, "schema": { "type": "string" } }], "responses": { "200": { "description": "Archived", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ArchiveResponse" } } } } } }
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Get item offer",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Item"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "description": "LoLBoost ID or external_id",
+            "schema": {
+              "type": "string",
+              "example": "seller-account-123"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Update item offer",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Item"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemUpdateRequest"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "description": "LoLBoost ID or external_id",
+            "schema": {
+              "type": "string",
+              "example": "seller-account-123"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Archive item offer",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "archived": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "description": "LoLBoost ID or external_id",
+            "schema": {
+              "type": "string",
+              "example": "seller-account-123"
+            }
+          }
+        ]
+      }
     },
     "/api/v1/items/bulk-remove": {
-      "post": { "tags": ["Items"], "summary": "Bulk archive items", "operationId": "bulkRemoveItems", "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/BulkRemoveRequest" } } } }, "responses": { "200": { "description": "Bulk result", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/BulkRemoveResponse" } } } } } }
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Bulk archive item offers",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkRemoveResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkRemoveRequest"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
-    "securitySchemes": { "BearerAuth": { "type": "http", "scheme": "bearer" } },
-    "schemas": {
-      "Account": { "type": "object", "properties": { "lolboost_account_id": { "type": "integer" }, "external_id": { "type": "string" }, "title": { "type": "string" }, "price": { "type": "integer" }, "status": { "type": "string" }, "created_at": { "type": "string" }, "updated_at": { "type": "string" }, "sold_at": { "type": "string", "nullable": true } } },
-      "Item": { "type": "object", "properties": { "lolboost_item_id": { "type": "integer" }, "external_id": { "type": "string" }, "title": { "type": "string" }, "price": { "type": "integer" }, "stock": { "type": "integer" }, "status": { "type": "string" } } },
-      "AccountCreateRequest": { "type": "object", "required": ["external_id", "title", "price"], "properties": { "external_id": { "type": "string", "example": "seller-account-123" }, "title": { "type": "string", "example": "League of Legends Account Diamond EUW" }, "game": { "type": "string", "example": "lol" }, "server": { "type": "string", "example": "EUW" }, "price": { "type": "integer", "example": 4999 }, "status": { "type": "string", "example": "listed" }, "parameters": { "type": "object" }, "credentials": { "type": "object" } } },
-      "AccountUpdateRequest": { "type": "object", "properties": { "title": { "type": "string" }, "price": { "type": "integer" }, "status": { "type": "string" } } },
-      "ItemCreateRequest": { "type": "object", "required": ["external_id", "title", "price"], "properties": { "external_id": { "type": "string", "example": "item-123" }, "title": { "type": "string", "example": "League of Legends Gift Item" }, "game": { "type": "string", "example": "lol" }, "type": { "type": "string", "example": "gift" }, "server": { "type": "string", "example": "EUW" }, "price": { "type": "integer", "example": 999 }, "stock": { "type": "integer", "example": 10 } } },
-      "ItemUpdateRequest": { "type": "object", "properties": { "title": { "type": "string" }, "price": { "type": "integer" }, "stock": { "type": "integer" }, "status": { "type": "string" } } },
-      "BulkRemoveRequest": { "type": "object", "required": ["external_ids"], "properties": { "external_ids": { "type": "array", "items": { "type": "string" }, "example": ["seller-account-1", "seller-account-2"] } } },
-      "ArchiveResponse": { "type": "object", "properties": { "success": { "type": "boolean" }, "archived": { "type": "boolean" }, "external_id": { "type": "string" } } },
-      "BulkRemoveResponse": { "type": "object", "properties": { "success": { "type": "boolean" }, "processed": { "type": "integer" }, "removed": { "type": "integer" }, "not_found": { "type": "integer" } } },
-      "PaginatedAccounts": { "type": "object", "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/Account" } }, "meta": { "type": "object" } } },
-      "PaginatedItems": { "type": "object", "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/Item" } }, "meta": { "type": "object" } } },
-      "Error": { "type": "object", "properties": { "message": { "type": "string" } } }
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "API key"
+      }
     },
-    "responses": {
-      "Unauthorized": { "description": "Unauthorized", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
-      "ValidationError": { "description": "Validation error", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
-      "NotFound": { "description": "Not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+    "schemas": {
+      "Account": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 123
+          },
+          "external_id": {
+            "type": "string",
+            "example": "seller-account-123"
+          },
+          "lolboost_account_id": {
+            "type": "integer",
+            "example": 123
+          },
+          "title": {
+            "type": "string",
+            "example": "League of Legends Account Diamond EUW"
+          },
+          "price": {
+            "type": "integer",
+            "example": 4999
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "pending",
+              "listed",
+              "processing",
+              "sold",
+              "refunded",
+              "archived"
+            ],
+            "example": "listed"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sold_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "AccountCreateRequest": {
+        "type": "object",
+        "required": [
+          "external_id",
+          "title",
+          "price"
+        ],
+        "properties": {
+          "external_id": {
+            "type": "string",
+            "example": "seller-account-123"
+          },
+          "title": {
+            "type": "string",
+            "example": "League of Legends Account Diamond EUW"
+          },
+          "game": {
+            "type": "string",
+            "example": "lol"
+          },
+          "server": {
+            "type": "string",
+            "example": "EUW"
+          },
+          "price": {
+            "type": "integer",
+            "example": 4999
+          },
+          "status": {
+            "type": "string",
+            "example": "listed"
+          },
+          "parameters": {
+            "type": "object",
+            "example": {
+              "level": 30,
+              "rank": "Diamond"
+            }
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/AccountCredentials"
+          }
+        }
+      },
+      "AccountUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer",
+            "example": 5999
+          },
+          "status": {
+            "type": "string",
+            "example": "listed"
+          },
+          "description": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "object"
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/AccountCredentials"
+          }
+        }
+      },
+      "AccountCredentials": {
+        "type": "object",
+        "properties": {
+          "login": {
+            "type": "string",
+            "example": "account-login"
+          },
+          "password": {
+            "type": "string",
+            "example": "account-password"
+          },
+          "email_login": {
+            "type": "string",
+            "example": "mail@example.com"
+          },
+          "email_password": {
+            "type": "string",
+            "example": "mail-password"
+          }
+        }
+      },
+      "Item": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 55
+          },
+          "external_id": {
+            "type": "string",
+            "example": "item-123"
+          },
+          "lolboost_item_id": {
+            "type": "integer",
+            "example": 55
+          },
+          "title": {
+            "type": "string",
+            "example": "LoL Gift Item"
+          },
+          "type": {
+            "type": "string",
+            "example": "gift"
+          },
+          "game": {
+            "type": "string",
+            "example": "lol"
+          },
+          "server": {
+            "type": "string",
+            "example": "EUW"
+          },
+          "price": {
+            "type": "integer",
+            "example": 999
+          },
+          "stock": {
+            "type": "integer",
+            "example": 10
+          },
+          "status": {
+            "type": "string",
+            "example": "listed"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ItemCreateRequest": {
+        "type": "object",
+        "required": [
+          "external_id",
+          "title",
+          "price"
+        ],
+        "properties": {
+          "external_id": {
+            "type": "string",
+            "example": "item-123"
+          },
+          "title": {
+            "type": "string",
+            "example": "LoL Gift Item"
+          },
+          "type": {
+            "type": "string",
+            "example": "gift"
+          },
+          "game": {
+            "type": "string",
+            "example": "lol"
+          },
+          "server": {
+            "type": "string",
+            "example": "EUW"
+          },
+          "price": {
+            "type": "integer",
+            "example": 999
+          },
+          "stock": {
+            "type": "integer",
+            "example": 10
+          },
+          "status": {
+            "type": "string",
+            "example": "listed"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "ItemUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "stock": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "BulkRemoveRequest": {
+        "type": "object",
+        "properties": {
+          "external_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "seller-account-123",
+              "seller-account-124"
+            ]
+          },
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": [
+              123,
+              124
+            ]
+          }
+        }
+      },
+      "BulkRemoveResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "processed": {
+            "type": "integer",
+            "example": 2
+          },
+          "removed": {
+            "type": "integer",
+            "example": 2
+          },
+          "not_found": {
+            "type": "integer",
+            "example": 0
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Unauthenticated."
+          }
+        }
+      },
+      "WebhookAccountSold": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "example": "account.sold"
+          },
+          "external_id": {
+            "type": "string",
+            "example": "seller-account-123"
+          },
+          "lolboost_account_id": {
+            "type": "integer",
+            "example": 123
+          },
+          "sold_at": {
+            "type": "string",
+            "example": "2026-06-19 15:30:00"
+          }
+        }
+      },
+      "WebhookItemSold": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "example": "item.sold"
+          },
+          "external_id": {
+            "type": "string",
+            "example": "item-123"
+          },
+          "lolboost_item_id": {
+            "type": "integer",
+            "example": 55
+          },
+          "quantity": {
+            "type": "integer",
+            "example": 1
+          },
+          "sold_at": {
+            "type": "string",
+            "example": "2026-06-19 15:30:00"
+          }
+        }
+      }
     }
   }
 }

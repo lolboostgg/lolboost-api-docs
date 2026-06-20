@@ -1,0 +1,143 @@
+<svg viewBox="0 0 1600 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" role="img" aria-label="">
+  <defs>
+    <linearGradient id="gradViolet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c4b5fd"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="gradBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="gradAmber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fde68a"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="gradGreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6ee7b7"/>
+      <stop offset="1" stop-color="#10b981"/>
+    </linearGradient>
+    <linearGradient id="gradFuchsia" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5d0fe"/>
+      <stop offset="1" stop-color="#d946ef"/>
+    </linearGradient>
+
+    <radialGradient id="glowViolet" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowBlue" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowAmber" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#f59e0b" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowGreen" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#10b981" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#10b981" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowFuchsia" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#d946ef" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#d946ef" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="blurSoft" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <!-- scattered particles -->
+  <g fill="#ffffff">
+    <circle cx="60" cy="60" r="3" opacity="0.35"/>
+    <circle cx="180" cy="340" r="2.5" opacity="0.3"/>
+    <circle cx="260" cy="80" r="2" opacity="0.25"/>
+    <circle cx="420" cy="330" r="3" opacity="0.3"/>
+    <circle cx="470" cy="70" r="2.5" opacity="0.3"/>
+    <circle cx="610" cy="350" r="2" opacity="0.25"/>
+    <circle cx="780" cy="60" r="2.5" opacity="0.3"/>
+    <circle cx="830" cy="340" r="3" opacity="0.3"/>
+    <circle cx="980" cy="80" r="2" opacity="0.25"/>
+    <circle cx="1030" cy="350" r="2.5" opacity="0.3"/>
+    <circle cx="1180" cy="65" r="3" opacity="0.3"/>
+    <circle cx="1230" cy="345" r="2" opacity="0.25"/>
+    <circle cx="1390" cy="75" r="2.5" opacity="0.3"/>
+    <circle cx="1440" cy="335" r="3" opacity="0.3"/>
+    <circle cx="1540" cy="90" r="2" opacity="0.25"/>
+  </g>
+
+  <!-- decorative diagonal accent stripes -->
+  <g transform="translate(701,210) rotate(18)" stroke-linecap="round" opacity="0.85">
+    <line x1="-34" y1="-170" x2="-34" y2="170" stroke="#8b5cf6" stroke-width="13"/>
+    <line x1="-12" y1="-170" x2="-12" y2="170" stroke="#38bdf8" stroke-width="13"/>
+    <line x1="10" y1="-170" x2="10" y2="170" stroke="#d946ef" stroke-width="13"/>
+    <line x1="32" y1="-170" x2="32" y2="170" stroke="#10b981" stroke-width="13"/>
+  </g>
+
+  <!-- Rank chevrons -->
+  <g transform="translate(110,190)">
+    <circle r="78" fill="url(#glowViolet)" filter="url(#blurSoft)"/>
+    <g transform="translate(0,-22)" fill="none" stroke="url(#gradViolet)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M -26 14 L 0 -10 L 26 14" opacity="1"/>
+      <path d="M -26 30 L 0 6 L 26 30" opacity="0.6"/>
+      <path d="M -26 46 L 0 22 L 26 46" opacity="0.3"/>
+    </g>
+  </g>
+
+  <!-- Headset -->
+  <g transform="translate(307,150)">
+    <circle r="78" fill="url(#glowBlue)" filter="url(#blurSoft)"/>
+    <path d="M -34 4 A 34 34 0 0 1 34 4" fill="none" stroke="url(#gradBlue)" stroke-width="9" stroke-linecap="round"/>
+    <rect x="-42" y="-2" width="16" height="32" rx="8" fill="url(#gradBlue)"/>
+    <rect x="26" y="-2" width="16" height="32" rx="8" fill="url(#gradBlue)"/>
+    <path d="M 34 26 Q 46 40 30 48" fill="none" stroke="url(#gradBlue)" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <!-- Crosshair -->
+  <g transform="translate(504,230)">
+    <circle r="78" fill="url(#glowGreen)" filter="url(#blurSoft)"/>
+    <circle r="26" fill="none" stroke="url(#gradGreen)" stroke-width="6"/>
+    <g stroke="url(#gradGreen)" stroke-width="6" stroke-linecap="round">
+      <line x1="0" y1="-44" x2="0" y2="-32"/>
+      <line x1="0" y1="32" x2="0" y2="44"/>
+      <line x1="-44" y1="0" x2="-32" y2="0"/>
+      <line x1="32" y1="0" x2="44" y2="0"/>
+    </g>
+    <circle r="4" fill="url(#gradGreen)"/>
+  </g>
+
+  <!-- Crown -->
+  <g transform="translate(898,160)">
+    <circle r="78" fill="url(#glowAmber)" filter="url(#blurSoft)"/>
+    <path d="M -36 16 L -36 -8 L -18 10 L 0 -24 L 18 10 L 36 -8 L 36 16 Z" fill="url(#gradAmber)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linejoin="round"/>
+    <rect x="-36" y="16" width="72" height="10" rx="3" fill="url(#gradAmber)"/>
+    <circle cx="-36" cy="-8" r="4" fill="url(#gradAmber)"/>
+    <circle cx="0" cy="-24" r="5" fill="url(#gradAmber)"/>
+    <circle cx="36" cy="-8" r="4" fill="url(#gradAmber)"/>
+  </g>
+
+  <!-- Lightning -->
+  <g transform="translate(1095,230)">
+    <circle r="78" fill="url(#glowAmber)" filter="url(#blurSoft)"/>
+    <path d="M 4 -42 L -22 6 L -4 6 L -10 42 L 24 -10 L 6 -10 Z" fill="url(#gradAmber)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Shield + check -->
+  <g transform="translate(1292,170)">
+    <circle r="78" fill="url(#glowFuchsia)" filter="url(#blurSoft)"/>
+    <path d="M 0 -38 L 30 -24 L 30 6 C 30 28 16 38 0 44 C -16 38 -30 28 -30 6 L -30 -24 Z" fill="url(#gradFuchsia)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M -13 2 L -3 13 L 16 -12" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Controller -->
+  <g transform="translate(1480,200)">
+    <circle r="78" fill="url(#glowViolet)" filter="url(#blurSoft)"/>
+    <rect x="-46" y="-20" width="92" height="40" rx="20" fill="url(#gradViolet)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+    <rect x="-30" y="-4" width="14" height="4" rx="2" fill="#ffffff" opacity="0.9"/>
+    <rect x="-25" y="-9" width="4" height="14" rx="2" fill="#ffffff" opacity="0.9"/>
+    <circle cx="20" cy="-6" r="4" fill="#ffffff" opacity="0.9"/>
+    <circle cx="30" cy="0" r="4" fill="#ffffff" opacity="0.9"/>
+    <circle cx="20" cy="6" r="4" fill="#ffffff" opacity="0.9"/>
+    <circle cx="10" cy="0" r="4" fill="#ffffff" opacity="0.55"/>
+  </g>
+</svg>

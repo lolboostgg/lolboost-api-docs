@@ -1,215 +1,91 @@
 ---
-title: LoLBoost Help Center
-description: Guides for customers, verified sellers, and Seller API integrators.
+title: Help Center
+description: Guides for buyers, sellers, and API partners.
+mode: "custom"
 ---
 
-<style>{`
-  .lb-hero-wrap {
-    margin: -2rem calc(50% - 50vw) 2.5rem;
-    min-height: 460px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(139,92,246,.28);
-    background:
-      linear-gradient(180deg, rgba(5, 7, 16, .78), rgba(5, 7, 16, .93)),
-      radial-gradient(circle at 50% 15%, rgba(139,92,246,.24), transparent 34%),
-      url('https://lolboost.gg/public/assets/website/images/banner-docs.png');
-    background-size: cover;
-    background-position: center;
-  }
-  .lb-hero-wrap:before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-    background-size: 48px 48px;
-    opacity: .16;
-  }
-  .lb-hero-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 980px;
-    padding: 5rem 1.5rem 4rem;
-    text-align: center;
-  }
-  .lb-eyebrow {
-    color: #a78bfa;
-    font-weight: 800;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    font-size: .82rem;
-    margin-bottom: 1rem;
-  }
-  .lb-hero-title {
-    font-size: clamp(2.4rem, 6vw, 4.8rem);
-    line-height: 1.02;
-    font-weight: 900;
-    color: #fff;
-    margin: 0 0 1.1rem;
-    text-shadow: 0 18px 60px rgba(0,0,0,.55);
-  }
-  .lb-hero-subtitle {
-    color: rgba(255,255,255,.78);
-    font-size: clamp(1.05rem, 2vw, 1.35rem);
-    line-height: 1.55;
-    max-width: 760px;
-    margin: 0 auto 2rem;
-  }
-  .lb-hero-actions, .lb-quick-links {
-    display: flex;
-    gap: .75rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .lb-primary-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: .55rem;
-    padding: .95rem 1.35rem;
-    border-radius: .8rem;
-    background: linear-gradient(135deg, #7c3aed, #2563eb);
-    color: #fff !important;
-    font-weight: 800;
-    text-decoration: none !important;
-    box-shadow: 0 18px 45px rgba(124,58,237,.35);
-  }
-  .lb-quick-links {
-    margin-top: 1.6rem;
-  }
-  .lb-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    padding: .62rem .9rem;
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: .65rem;
-    background: rgba(255,255,255,.055);
-    color: rgba(255,255,255,.88) !important;
-    text-decoration: none !important;
-    font-weight: 700;
-    backdrop-filter: blur(10px);
-  }
-  .lb-section-head {
-    margin: 0 0 1.25rem;
-  }
-  .lb-section-head h2 {
-    font-size: 1.7rem;
-    margin: 0 0 .35rem;
-  }
-  .lb-section-head p {
-    margin: 0;
-    color: var(--gray-11);
-  }
-  .lb-topic-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  .lb-topic-card {
-    display: block;
-    border: 1px solid rgba(139,92,246,.18);
-    border-radius: 1rem;
-    padding: 1.25rem;
-    min-height: 160px;
-    background: linear-gradient(180deg, rgba(139,92,246,.08), rgba(255,255,255,.02));
-    text-decoration: none !important;
-    transition: transform .16s ease, border-color .16s ease, background .16s ease;
-  }
-  .lb-topic-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(139,92,246,.45);
-    background: linear-gradient(180deg, rgba(139,92,246,.15), rgba(255,255,255,.035));
-  }
-  .lb-topic-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: .8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-    background: rgba(139,92,246,.14);
-    color: #a78bfa;
-    border: 1px solid rgba(139,92,246,.22);
-    font-size: 1.15rem;
-  }
-  .lb-topic-card h3 {
-    margin: 0 0 .45rem;
-    color: var(--fg-color);
-    font-size: 1.05rem;
-  }
-  .lb-topic-card p {
-    margin: 0;
-    color: var(--gray-11);
-    line-height: 1.55;
-  }
-  @media (max-width: 900px) {
-    .lb-topic-grid { grid-template-columns: 1fr; }
-    .lb-hero-wrap { min-height: 520px; }
-  }
-`}</style>
+<div className="lb-hero">
+  <img
+    src="https://lolboost.gg/public/assets/website/images/banner-docs.png"
+    alt=""
+    noZoom
+    className="lb-hero-illustration absolute inset-0 w-full h-full object-cover"
+  />
+  <div className="lb-hero-grid" />
+  <div className="lb-hero-scrim absolute inset-0" />
 
-<div className="lb-hero-wrap">
-  <div className="lb-hero-inner">
-    <div className="lb-eyebrow">LoLBoost Help Center</div>
-    <h1 className="lb-hero-title">What do you need help with?</h1>
-    <p className="lb-hero-subtitle">
-      Self-service guides for customers, verified sellers, and Seller API integrators. Search the docs or start with a topic below.
+  <div className="lb-hero-content px-4 py-20 lg:py-28 max-w-3xl mx-auto text-center">
+    <p className="lb-eyebrow text-xs font-semibold uppercase text-violet-600 dark:text-violet-400">
+      LoLBoost Help Center
     </p>
-    <div className="lb-hero-actions">
-      <a className="lb-primary-btn" href="#popular-topics">Get Started →</a>
+    <h1 className="mt-4 text-4xl sm:text-5xl font-semibold text-gray-900 dark:text-zinc-50 tracking-tight">
+      What do you need help with?
+    </h1>
+    <p className="mt-4 text-lg text-gray-600 dark:text-zinc-400 max-w-xl mx-auto">
+      Self-service guides for buyers, verified sellers, and Seller API integrators. Search the docs or start with a topic below.
+    </p>
+
+    <div className="mt-8 flex justify-center">
+      <a
+        href="/help/what-you-can-do"
+        className="lb-cta inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white"
+      >
+        Get Started
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
-    <div className="lb-quick-links">
-      <a className="lb-chip" href="/essentials/orders"><Icon icon="life-ring" iconType="regular" /> Order Problem</a>
-      <a className="lb-chip" href="/essentials/refunds"><Icon icon="shield-halved" iconType="solid" /> Refunds and Warranties</a>
-      <a className="lb-chip" href="/guides/start-selling"><Icon icon="store" iconType="solid" /> Selling on LoLBoost</a>
+
+    <div className="mt-6 flex flex-wrap justify-center gap-3">
+      <a href="/help/order-problem" className="lb-pill rounded-full px-4 py-2 text-sm font-medium text-gray-700 dark:text-zinc-300">
+        Order Problem
+      </a>
+      <a href="/help/refunds-warranties" className="lb-pill rounded-full px-4 py-2 text-sm font-medium text-gray-700 dark:text-zinc-300">
+        Refunds and Warranties
+      </a>
+      <a href="/partner-center/start-selling" className="lb-pill rounded-full px-4 py-2 text-sm font-medium text-gray-700 dark:text-zinc-300">
+        Selling on LoLBoost
+      </a>
     </div>
   </div>
 </div>
 
-<div id="popular-topics" className="lb-section-head">
-  <h2>Popular topics</h2>
-  <p>Starting points across the Help Center, Seller Center, Seller API, and API Reference.</p>
-</div>
+<div className="max-w-5xl mx-auto px-6 py-16">
+  <h2 className="text-2xl font-semibold text-gray-900 dark:text-zinc-50">
+    Popular topics
+  </h2>
+  <p className="mt-2 text-gray-500 dark:text-zinc-500">
+    Starting points across the Help Center, Seller Center, and Seller API.
+  </p>
 
-<div className="lb-topic-grid">
-  <a className="lb-topic-card" href="/essentials/buying">
-    <div className="lb-topic-icon"><Icon icon="cart-shopping" iconType="solid" /></div>
-    <h3>How to Buy</h3>
-    <p>Checkout, delivery, account access, and what to expect after purchase.</p>
-  </a>
-
-  <a className="lb-topic-card" href="/essentials/orders">
-    <div className="lb-topic-icon"><Icon icon="headset" iconType="solid" /></div>
-    <h3>Orders and Support</h3>
-    <p>Order problems, tickets, missing delivery, and how to contact support.</p>
-  </a>
-
-  <a className="lb-topic-card" href="/essentials/refunds">
-    <div className="lb-topic-icon"><Icon icon="shield-halved" iconType="solid" /></div>
-    <h3>Refunds and Warranties</h3>
-    <p>Refund rules, warranty coverage, and claim handling after purchase.</p>
-  </a>
-
-  <a className="lb-topic-card" href="/guides/start-selling">
-    <div className="lb-topic-icon"><Icon icon="store" iconType="solid" /></div>
-    <h3>Start Selling</h3>
-    <p>How selling works, how to become a partner, and what sellers need.</p>
-  </a>
-
-  <a className="lb-topic-card" href="/guides/sync-flow">
-    <div className="lb-topic-icon"><Icon icon="plug" iconType="solid" /></div>
-    <h3>Seller API</h3>
-    <p>Authentication, webhooks, sync flows, and anti double-sale automation.</p>
-  </a>
-
-  <a className="lb-topic-card" href="/api-reference/accounts/list-accounts">
-    <div className="lb-topic-icon"><Icon icon="code" iconType="solid" /></div>
-    <h3>API Reference</h3>
-    <p>Test accounts, items, bulk operations, and webhook events.</p>
-  </a>
+  <div className="mt-8">
+    <CardGroup cols={3}>
+      <Card title="What you can do on LoLBoost" icon="circle-question" href="/help/what-you-can-do">
+        Marketplace overview for buyers and sellers.
+      </Card>
+      <Card title="How to Buy" icon="cart-shopping" href="/help/what-you-can-do#how-to-buy">
+        Checkout, delivery, and what to expect after purchase.
+      </Card>
+      <Card title="Find the Right Offer" icon="magnifying-glass" href="/help/what-you-can-do#find-the-right-offer">
+        Search, filters, and how to compare listings.
+      </Card>
+      <Card title="Orders and Support" icon="life-ring" href="/help/order-problem">
+        Order issues, tickets, and what to include when you contact us.
+      </Card>
+      <Card title="Refunds and Warranties" icon="shield" href="/help/refunds-warranties">
+        Refund rules, warranty coverage, and how to file a claim.
+      </Card>
+      <Card title="Account Safety" icon="lock" href="/help/account-safety">
+        Usage terms and steps to secure accounts after purchase.
+      </Card>
+      <Card title="Start Selling" icon="store" href="/partner-center/start-selling">
+        How selling works and how to become a verified seller.
+      </Card>
+      <Card title="Seller Guide" icon="book-open" href="/partner-center/seller-guide">
+        Listings, orders, payouts, and seller policies.
+      </Card>
+      <Card title="Seller API" icon="terminal" href="/essentials/overview">
+        Authentication, webhooks, and API reference for integrations.
+      </Card>
+    </CardGroup>
+  </div>
 </div>
