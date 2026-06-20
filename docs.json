@@ -12,10 +12,14 @@
     "light": "#8b5cf6",
     "dark": "#a78bfa"
   },
+  "icons": {
+    "library": "fontawesome"
+  },
   "navigation": {
     "tabs": [
       {
         "tab": "Help Center",
+        "icon": "circle-question",
         "groups": [
           {
             "group": "Popular topics",
@@ -31,6 +35,7 @@
       },
       {
         "tab": "Seller Center",
+        "icon": "store",
         "groups": [
           {
             "group": "Selling on LoLBoost",
@@ -44,6 +49,7 @@
       },
       {
         "tab": "Seller API",
+        "icon": "terminal",
         "groups": [
           {
             "group": "Get started",
@@ -74,6 +80,7 @@
       },
       {
         "tab": "API Reference",
+        "icon": "code",
         "openapi": "api-reference/openapi.json"
       }
     ]
