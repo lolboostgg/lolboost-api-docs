@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "LoLBoost Partner API",
+    "title": "LoLBoost Seller API",
     "version": "1.0.0",
     "description": "Seller API for syncing account offers and item offers with LoLBoost."
   },

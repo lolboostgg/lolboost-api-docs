@@ -1,0 +1,48 @@
+---
+title: Seller API overview
+description: What you can build with the LoLBoost Seller API.
+---
+
+# Seller API overview
+
+The Seller API lets verified LoLBoost sellers manage listings and orders programmatically instead of doing everything by hand in the Seller Area. It's built for sellers who run their own stock systems and want LoLBoost to stay in sync automatically.
+
+## Who it's for
+
+You need an approved, active LoLBoost seller account before you can use the API. If you're not selling on LoLBoost yet, start with [Start selling](/partner-center/start-selling) first.
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="Manage offers" icon="boxes-stacked">
+    Create, update, list, and remove account and item offers from your own system.
+  </Card>
+  <Card title="Bulk stock updates" icon="layer-group" href="/guides/bulk-stock-update">
+    Remove many offers at once when stock changes outside LoLBoost.
+  </Card>
+  <Card title="Keep accounts and items in sync" icon="arrows-rotate" href="/guides/account-sync">
+    Map your internal IDs to LoLBoost listings with `external_id`.
+  </Card>
+  <Card title="React to events" icon="bolt" href="/webhooks/overview">
+    Get notified the moment an offer sells, so your own stock updates instantly.
+  </Card>
+</CardGroup>
+
+## Before you start
+
+<Steps>
+  <Step title="Generate an API key">
+    Open the [Seller Area](https://lolboost.gg/seller-area/auth/login) and create a key under Seller API. Store it somewhere safe, it's only shown once.
+  </Step>
+  <Step title="Authenticate your requests">
+    See [Authentication](/essentials/authentication) for how to send the key on every request.
+  </Step>
+  <Step title="Run a test request">
+    Follow [Testing](/essentials/testing) to create a test offer from the API Reference playground.
+  </Step>
+  <Step title="Handle errors">
+    Check [Errors](/essentials/errors) so your integration can recover from common failure cases.
+  </Step>
+</Steps>
+
+Every endpoint, with request and response examples, is documented in the **API Reference** tab above.

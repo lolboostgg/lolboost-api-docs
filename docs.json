@@ -21,6 +21,7 @@
             "group": "Popular topics",
             "pages": [
               "index",
+              "help/what-you-can-do",
               "help/order-problem",
               "help/refunds-warranties",
               "help/account-safety"
@@ -29,7 +30,7 @@
         ]
       },
       {
-        "tab": "Partner Center",
+        "tab": "Seller Center",
         "groups": [
           {
             "group": "Selling on LoLBoost",
@@ -42,11 +43,12 @@
         ]
       },
       {
-        "tab": "Partner API",
+        "tab": "Seller API",
         "groups": [
           {
             "group": "Get started",
             "pages": [
+              "essentials/overview",
               "essentials/authentication",
               "essentials/testing",
               "essentials/errors"
@@ -89,11 +91,11 @@
       },
       {
         "label": "Seller Area",
-        "href": "https://new.lolboost.gg/seller"
+        "href": "https://lolboost.gg/seller-area/auth/login"
       },
       {
-        "label": "Partner API",
-        "href": "/essentials/authentication"
+        "label": "Seller API",
+        "href": "/essentials/overview"
       }
     ]
   },

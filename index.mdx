@@ -1,38 +1,87 @@
 ---
 title: Help Center
 description: Guides for buyers, sellers, and API partners.
+mode: "custom"
 ---
 
-# What do you need help with?
+<div className="lb-hero">
+  <div className="lb-hero-grid" />
+  <div className="lb-hero-blob -top-10 -left-10 w-72 h-72 bg-violet-400" />
+  <div className="lb-hero-blob -top-16 right-0 w-80 h-80 bg-fuchsia-400" />
+  <div className="lb-hero-blob top-32 left-1/3 w-64 h-64 bg-sky-400" />
 
-Self service guides for buyers, partnered sellers, and API partners. Search the docs or start with a topic below.
+  <div className="lb-hero-content px-4 py-20 lg:py-28 max-w-3xl mx-auto text-center">
+    <p className="lb-eyebrow text-xs font-semibold uppercase text-violet-600 dark:text-violet-400">
+      LoLBoost Help Center
+    </p>
+    <h1 className="mt-4 text-4xl sm:text-5xl font-semibold text-gray-900 dark:text-zinc-50 tracking-tight">
+      What do you need help with?
+    </h1>
+    <p className="mt-4 text-lg text-gray-600 dark:text-zinc-400 max-w-xl mx-auto">
+      Self-service guides for buyers, verified sellers, and Seller API integrators. Search the docs or start with a topic below.
+    </p>
 
-<CardGroup cols={3}>
-  <Card title="What you can do on LoLBoost" icon="circle-question" href="/help/order-problem">
-    Marketplace overview for buyers and sellers.
-  </Card>
-  <Card title="How to Buy" icon="cart-shopping" href="/help/order-problem">
-    Checkout, delivery, and what to expect after purchase.
-  </Card>
-  <Card title="Find the Right Offer" icon="magnifying-glass" href="/help/account-safety">
-    Search, filters, and how to compare listings.
-  </Card>
-  <Card title="Orders and Support" icon="life-ring" href="/help/order-problem">
-    Order issues, tickets, and what to include when you contact us.
-  </Card>
-  <Card title="Refunds and Warranties" icon="shield" href="/help/refunds-warranties">
-    Refund rules, warranty coverage, and how to file a claim.
-  </Card>
-  <Card title="Account Safety" icon="lock" href="/help/account-safety">
-    Usage terms and steps to secure accounts after purchase.
-  </Card>
-  <Card title="Start Selling" icon="store" href="/partner-center/start-selling">
-    How selling works and how to become a partner.
-  </Card>
-  <Card title="Seller Guide" icon="book-open" href="/partner-center/seller-guide">
-    Listings, orders, payouts, and seller policies.
-  </Card>
-  <Card title="Partner API" icon="terminal" href="/essentials/authentication">
-    Authentication, webhooks, and API reference for integrations.
-  </Card>
-</CardGroup>
+    <div className="mt-8 flex justify-center">
+      <a
+        href="/help/what-you-can-do"
+        className="lb-cta inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white"
+      >
+        Get Started
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div className="mt-6 flex flex-wrap justify-center gap-3">
+      <a href="/help/order-problem" className="lb-pill rounded-full px-4 py-2 text-sm font-medium text-gray-700 dark:text-zinc-300">
+        Order Problem
+      </a>
+      <a href="/help/refunds-warranties" className="lb-pill rounded-full px-4 py-2 text-sm font-medium text-gray-700 dark:text-zinc-300">
+        Refunds and Warranties
+      </a>
+      <a href="/partner-center/start-selling" className="lb-pill rounded-full px-4 py-2 text-sm font-medium text-gray-700 dark:text-zinc-300">
+        Selling on LoLBoost
+      </a>
+    </div>
+  </div>
+</div>
+
+<div className="max-w-5xl mx-auto px-6 py-16">
+  <h2 className="text-2xl font-semibold text-gray-900 dark:text-zinc-50">
+    Popular topics
+  </h2>
+  <p className="mt-2 text-gray-500 dark:text-zinc-500">
+    Starting points across the Help Center, Seller Center, and Seller API.
+  </p>
+
+  <div className="mt-8">
+    <CardGroup cols={3}>
+      <Card title="What you can do on LoLBoost" icon="circle-question" href="/help/what-you-can-do">
+        Marketplace overview for buyers and sellers.
+      </Card>
+      <Card title="How to Buy" icon="cart-shopping" href="/help/what-you-can-do#how-to-buy">
+        Checkout, delivery, and what to expect after purchase.
+      </Card>
+      <Card title="Find the Right Offer" icon="magnifying-glass" href="/help/what-you-can-do#find-the-right-offer">
+        Search, filters, and how to compare listings.
+      </Card>
+      <Card title="Orders and Support" icon="life-ring" href="/help/order-problem">
+        Order issues, tickets, and what to include when you contact us.
+      </Card>
+      <Card title="Refunds and Warranties" icon="shield" href="/help/refunds-warranties">
+        Refund rules, warranty coverage, and how to file a claim.
+      </Card>
+      <Card title="Account Safety" icon="lock" href="/help/account-safety">
+        Usage terms and steps to secure accounts after purchase.
+      </Card>
+      <Card title="Start Selling" icon="store" href="/partner-center/start-selling">
+        How selling works and how to become a verified seller.
+      </Card>
+      <Card title="Seller Guide" icon="book-open" href="/partner-center/seller-guide">
+        Listings, orders, payouts, and seller policies.
+      </Card>
+      <Card title="Seller API" icon="terminal" href="/essentials/overview">
+        Authentication, webhooks, and API reference for integrations.
+      </Card>
+    </CardGroup>
+  </div>
+</div>

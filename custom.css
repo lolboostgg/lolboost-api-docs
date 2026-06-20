@@ -1,0 +1,87 @@
+/* LoLBoost custom styling — hero landing page */
+
+.lb-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+  background: linear-gradient(180deg, #faf5ff 0%, #f5f3ff 60%, #ffffff 100%);
+}
+
+.dark .lb-hero {
+  border-bottom-color: rgba(124, 58, 237, 0.25);
+  background: radial-gradient(60% 55% at 50% -10%, rgba(124, 58, 237, 0.35), transparent 60%),
+    radial-gradient(45% 45% at 88% 8%, rgba(139, 92, 246, 0.16), transparent 60%),
+    radial-gradient(40% 40% at 8% 18%, rgba(167, 139, 250, 0.12), transparent 60%),
+    #07060c;
+}
+
+.lb-hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(rgba(124, 58, 237, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(55% 60% at 50% 15%, black, transparent 75%);
+  mask-image: radial-gradient(55% 60% at 50% 15%, black, transparent 75%);
+}
+
+.dark .lb-hero-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+}
+
+.lb-hero-blob {
+  position: absolute;
+  z-index: 0;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.dark .lb-hero-blob {
+  opacity: 0.35;
+}
+
+.lb-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.lb-eyebrow {
+  letter-spacing: 0.14em;
+}
+
+.lb-cta {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  box-shadow: 0 10px 28px -10px rgba(124, 58, 237, 0.55);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.lb-cta:hover {
+  box-shadow: 0 14px 32px -8px rgba(124, 58, 237, 0.7);
+  transform: translateY(-1px);
+}
+
+.lb-pill {
+  border: 1px solid rgba(124, 58, 237, 0.18);
+  background: rgba(124, 58, 237, 0.04);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.dark .lb-pill {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.lb-pill:hover {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+.dark .lb-pill:hover {
+  background: rgba(124, 58, 237, 0.14);
+  border-color: rgba(124, 58, 237, 0.45);
+}
