@@ -7,8 +7,8 @@
   },
   "servers": [
     {
-      "url": "https://lolboost.gg",
-      "description": "LoLBoost live environment"
+      "url": "https://api.lolboost.gg",
+      "description": "LoLBoost API environment"
     }
   ],
   "security": [
