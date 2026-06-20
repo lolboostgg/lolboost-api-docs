@@ -1,87 +1,19 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "LoLBoost",
+  "name": "LoLBoost Help Center",
+  "favicon": "https://lolboost.gg/public/assets/website/images/logo.svg",
   "logo": {
     "light": "https://lolboost.gg/public/assets/website/images/logo.svg",
     "dark": "https://lolboost.gg/public/assets/website/images/logo.svg"
   },
-  "favicon": "https://lolboost.gg/public/assets/website/images/logo.svg",
   "colors": {
-    "primary": "#7c3aed",
-    "light": "#8b5cf6",
-    "dark": "#a78bfa"
+    "primary": "#8b5cf6",
+    "light": "#a78bfa",
+    "dark": "#7c3aed"
   },
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "Help Center",
-        "groups": [
-          {
-            "group": "Popular topics",
-            "pages": [
-              "index",
-              "help/what-you-can-do",
-              "help/order-problem",
-              "help/refunds-warranties",
-              "help/account-safety"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Seller Center",
-        "groups": [
-          {
-            "group": "Selling on LoLBoost",
-            "pages": [
-              "partner-center/start-selling",
-              "partner-center/seller-guide",
-              "partner-center/payouts"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Seller API",
-        "groups": [
-          {
-            "group": "Get started",
-            "pages": [
-              "essentials/overview",
-              "essentials/authentication",
-              "essentials/testing",
-              "essentials/errors"
-            ]
-          },
-          {
-            "group": "Sync workflows",
-            "pages": [
-              "guides/account-sync",
-              "guides/item-sync",
-              "guides/bulk-stock-update"
-            ]
-          },
-          {
-            "group": "Webhooks",
-            "pages": [
-              "webhooks/overview",
-              "webhooks/account-events",
-              "webhooks/item-events"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API Reference",
-        "openapi": "api-reference/openapi.json"
-      }
-    ]
-  },
-  "api": {
-    "playground": {
-      "mode": "show"
-    }
+  "icons": {
+    "library": "fontawesome"
   },
   "navbar": {
     "links": [
@@ -95,7 +27,46 @@
       },
       {
         "label": "Seller API",
-        "href": "/essentials/overview"
+        "href": "/api-reference/accounts/list-accounts"
+      }
+    ]
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Help Center",
+        "icon": "book-open",
+        "groups": [
+          {
+            "group": "Start here",
+            "pages": ["index", "essentials/buying", "essentials/orders", "essentials/refunds", "essentials/account-safety"]
+          }
+        ]
+      },
+      {
+        "tab": "Seller Center",
+        "icon": "store",
+        "groups": [
+          {
+            "group": "Seller Guide",
+            "pages": ["guides/start-selling", "guides/listings", "guides/orders", "guides/payouts"]
+          }
+        ]
+      },
+      {
+        "tab": "Seller API",
+        "icon": "terminal",
+        "groups": [
+          {
+            "group": "API Guides",
+            "pages": ["guides/authentication", "guides/sync-flow", "guides/bulk-sync", "webhooks/overview", "webhooks/account-events", "webhooks/item-events"]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "icon": "code",
+        "openapi": "api-reference/openapi.json"
       }
     ]
   },

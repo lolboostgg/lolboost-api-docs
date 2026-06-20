@@ -1,19 +1,16 @@
 ---
-title: Webhooks overview
-description: Receive sync events from LoLBoost.
+title: Webhooks Overview
+description: Webhooks sent to seller systems.
+icon: webhook
 ---
 
-# Webhooks
+Webhooks notify your system when an account or item changes on LoLBoost.
 
-Configure your webhook URL in the Seller Area under Seller API. LoLBoost sends events to your endpoint when important sync actions happen.
+Supported events include:
 
-Recommended events to handle first:
-
-| Event | Purpose |
-| --- | --- |
-| account.created | Save the LoLBoost account ID |
-| account.sold | Mark an account as sold in your system |
-| account.archived | Mark an account as removed |
-| item.created | Save the LoLBoost item ID |
-| item.sold | Mark an item as sold or reduce stock |
-| item.archived | Mark an item as removed |
+- `account.created`
+- `account.sold`
+- `account.archived`
+- `item.created`
+- `item.sold`
+- `item.archived`

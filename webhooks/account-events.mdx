@@ -1,22 +1,8 @@
 ---
-title: Account events
+title: Account Events
 description: Account webhook payloads.
+icon: user
 ---
-
-# Account events
-
-## account.created
-
-```json
-{
-  "event": "account.created",
-  "external_id": "seller-account-123",
-  "lolboost_account_id": 123,
-  "created_at": "2026-06-19 15:30:00"
-}
-```
-
-## account.sold
 
 ```json
 {
@@ -24,16 +10,5 @@ description: Account webhook payloads.
   "external_id": "seller-account-123",
   "lolboost_account_id": 123,
   "sold_at": "2026-06-19 15:30:00"
-}
-```
-
-## account.archived
-
-```json
-{
-  "event": "account.archived",
-  "external_id": "seller-account-123",
-  "lolboost_account_id": 123,
-  "archived_at": "2026-06-19 15:30:00"
 }
 ```
