@@ -26,9 +26,43 @@
             "pages": [
               "index",
               "help/what-you-can-do",
-              "help/order-problem",
+              "help/get-started",
+              "help/order-problem"
+            ]
+          },
+          {
+            "group": "FAQs by game",
+            "pages": [
+              "help/faq-league-of-legends",
+              "help/faq-valorant",
+              "help/faq-tft"
+            ]
+          },
+          {
+            "group": "Orders & boosting",
+            "pages": [
+              "help/boost-progress",
+              "help/account-access",
+              "help/order-disputes",
+              "help/trustworthy-boosters",
+              "help/contacting-booster"
+            ]
+          },
+          {
+            "group": "Payments & account",
+            "pages": [
+              "help/payment-methods",
               "help/refunds-warranties",
-              "help/account-safety"
+              "help/account-safety",
+              "help/delete-account"
+            ]
+          },
+          {
+            "group": "Trust & legal",
+            "pages": [
+              "help/is-lolboost-legit",
+              "legal/terms-of-service",
+              "legal/imprint"
             ]
           }
         ]
@@ -109,6 +143,21 @@
   "footer": {
     "socials": {
       "website": "https://lolboost.gg"
-    }
+    },
+    "links": [
+      {
+        "header": "Legal",
+        "items": [
+          {
+            "label": "Terms of Service",
+            "href": "/legal/terms-of-service"
+          },
+          {
+            "label": "Imprint",
+            "href": "/legal/imprint"
+          }
+        ]
+      }
+    ]
   }
 }
