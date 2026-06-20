@@ -5,21 +5,76 @@ mode: "custom"
 hidden: true
 ---
 
-<div className="max-w-3xl mx-auto px-6 py-12">
+export const Section = ({ id, title, children }) => (
+  <div id={id} className="scroll-mt-32 mb-6 rounded-2xl border border-gray-200 dark:border-zinc-800 bg-gray-50/60 dark:bg-zinc-900/40 p-6 md:p-8">
+    <h2 className="text-xl font-semibold text-gray-900 dark:text-zinc-50 mb-4">{title}</h2>
+    {children}
+  </div>
+);
 
-# Booster Guide
+export const RuleTable = ({ rows }) => (
+  <div className="overflow-hidden rounded-xl border border-gray-200 dark:border-zinc-800">
+    <table className="w-full text-sm">
+      <thead className="bg-gray-100 dark:bg-zinc-900">
+        <tr>
+          <th className="px-4 py-2.5 text-left font-semibold text-gray-700 dark:text-zinc-300">Rule</th>
+          <th className="px-4 py-2.5 text-left font-semibold text-gray-700 dark:text-zinc-300">Details</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-gray-200 dark:divide-zinc-800">
+        {rows.map((row, i) => (
+          <tr key={i}>
+            <td className="px-4 py-3 align-top font-medium text-gray-900 dark:text-zinc-100 whitespace-nowrap">{row[0]}</td>
+            <td className="px-4 py-3 align-top text-gray-600 dark:text-zinc-400">{row[1]}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
 
-Welcome to the LoLBoost booster team. This guide covers how to handle orders, communicate with customers, and stay compliant with platform rules. Read it fully before taking your first order, it's also where you'll come back to whenever a situation isn't clear.
+export const FineTier = ({ label, range, badgeClass, rows }) => (
+  <div>
+    <div className="mb-3 flex items-center gap-3">
+      <h3 className="text-base font-semibold text-gray-900 dark:text-zinc-50">{label}</h3>
+      <span className={"rounded-full px-2.5 py-1 text-xs font-semibold " + badgeClass}>{range}</span>
+    </div>
+    <div className="overflow-hidden rounded-xl border border-gray-200 dark:border-zinc-800">
+      <table className="w-full text-sm">
+        <tbody className="divide-y divide-gray-200 dark:divide-zinc-800">
+          {rows.map((row, i) => (
+            <tr key={i}>
+              <td className="px-4 py-2.5 text-gray-700 dark:text-zinc-300">{row[0]}</td>
+              <td className="px-4 py-2.5 text-right font-semibold text-gray-900 dark:text-zinc-50 whitespace-nowrap">{row[1]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+);
 
-<Info>
-  This page isn't listed in the public navigation. Share the direct link only with active, verified boosters.
-</Info>
+<div className="max-w-4xl mx-auto px-6 py-12">
 
-<Warning>
-  All fines are deducted from your payout. If you're ever unsure about a situation, open a [Discord ticket](https://discord.com/channels/926928301807771708/1207383976239702087) **before** acting. Asking first is always better than guessing.
-</Warning>
+<p className="lb-eyebrow text-xs font-semibold uppercase text-violet-600 dark:text-violet-400">
+  Internal · Boosters only
+</p>
+<h1 className="mt-3 text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-zinc-50 tracking-tight">
+  Booster Guide
+</h1>
+<p className="mt-4 max-w-2xl text-base text-gray-600 dark:text-zinc-400">
+  Welcome to the LoLBoost booster team. This guide covers how to handle orders, communicate with customers, and stay compliant with platform rules. Read it fully before taking your first order, it's also where you'll come back to whenever a situation isn't clear.
+</p>
 
-<div className="mt-6 flex flex-wrap gap-2">
+<div className="mt-6">
+  <Info>This page isn't listed in the public navigation. Share the direct link only with active, verified boosters.</Info>
+</div>
+
+<div className="mt-4 mb-8">
+  <Warning>All fines are deducted from your payout. If you're ever unsure about a situation, open a [Discord ticket](https://discord.com/channels/926928301807771708/1207383976239702087) **before** acting. Asking first is always better than guessing.</Warning>
+</div>
+
+<div className="sticky top-16 z-10 -mx-6 mb-10 flex flex-wrap gap-2 border-y border-gray-200 dark:border-zinc-800 bg-white/90 px-6 py-3 backdrop-blur dark:bg-black/80">
   <a href="#quick-rules" className="lb-pill rounded-full px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-zinc-300">Quick rules</a>
   <a href="#order-management" className="lb-pill rounded-full px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-zinc-300">Order management</a>
   <a href="#boosting-rules" className="lb-pill rounded-full px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-zinc-300">Boosting rules</a>
@@ -30,162 +85,176 @@ Welcome to the LoLBoost booster team. This guide covers how to handle orders, co
   <a href="#where-to-get-help" className="lb-pill rounded-full px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-zinc-300">Where to get help</a>
 </div>
 
-***
+<Section id="quick-rules" title="Quick rules">
+  <CardGroup cols={2}>
+    <Card title="Use the order chat" icon="comments">
+      All customer communication stays inside the website Order Chat, every time.
+    </Card>
+    <Card title="Start fast" icon="bolt">
+      Start Solo orders within 30 minutes if login details have already been provided.
+    </Card>
+    <Card title="Keep quality high" icon="chart-line">
+      Aim for a 70% winrate and follow every order detail exactly as written.
+    </Card>
+    <Card title="Ask early" icon="ticket">
+      Open a [Discord ticket](https://discord.com/channels/926928301807771708/1207383976239702087) the moment something is unclear or doesn't go to plan.
+    </Card>
+  </CardGroup>
+</Section>
 
-## Quick rules
+<Section id="order-management" title="Order management">
+  <p className="mb-2 text-sm font-semibold text-gray-900 dark:text-zinc-50">Solo orders</p>
+  <div className="mb-6">
+    <RuleTable rows={[
+      ["Start within 30 minutes", "Once you claim the order and login details are provided, begin promptly."],
+      ["Message the customer first", "Greet them in the Order Chat, confirm the order details, then start playing."],
+      ["Stay active", "Aim for 7-10 games per day. Fewer than that can count as inactivity."],
+      ["Continue paused orders", "If an order is paused, resume within 14 hours. Longer delays can be penalized."],
+    ]} />
+  </div>
 
-<CardGroup cols={2}>
-  <Card title="Use the order chat" icon="comments">
-    All customer communication stays inside the website Order Chat, every time.
-  </Card>
-  <Card title="Start fast" icon="bolt">
-    Start Solo orders within 30 minutes if login details have already been provided.
-  </Card>
-  <Card title="Keep quality high" icon="chart-line">
-    Aim for a 70% winrate and follow every order detail exactly as written.
-  </Card>
-  <Card title="Ask early" icon="ticket">
-    Open a [Discord ticket](https://discord.com/channels/926928301807771708/1207383976239702087) the moment something is unclear or doesn't go to plan.
-  </Card>
-</CardGroup>
+  <p className="mb-2 text-sm font-semibold text-gray-900 dark:text-zinc-50">DuoQ orders</p>
+  <RuleTable rows={[
+    ["Schedule through the Order Chat dashboard", "Never schedule through the League client or Discord DMs."],
+    ["Confirm playtimes", "If you can't make an agreed time, open a Boosting Ticket early, missing playtimes without notice isn't allowed."],
+    ["Use a correctly matched account", "Your DuoQ account must be within 2 divisions of the customer's rank."],
+    ["Never use the customer's account for DuoQ", "Unless staff has explicitly approved it for that order."],
+  ]} />
+</Section>
 
-***
+<Section id="boosting-rules" title="Boosting rules">
+  <ul className="mb-4 list-disc space-y-1.5 pl-5 text-sm text-gray-700 dark:text-zinc-300">
+    <li>Follow every order detail exactly: role, champions, summoner spells, streaming preference, offline mode, Solo Boost vs Hidden Duo, and any other notes on the order.</li>
+    <li>Target at least a <strong>70% winrate</strong> across the boost.</li>
+    <li>Never ask a customer to ignore order details or switch role/champions to make things easier on you.</li>
+    <li>Keep in-game chat to essential shot-calling only.</li>
+  </ul>
 
-## Order management
+  <AccordionGroup>
+    <Accordion title="Win Boost losses">
+      Every loss during a Win Boost requires one additional win to compensate. The order isn't complete until the purchased number of net wins is reached.
+    </Accordion>
+    <Accordion title="Placements">
+      5 placement matches require a 70% winrate. For fewer matches, any shortfall must be compensated with equivalent extra wins.
+    </Accordion>
+    <Accordion title="Promotions during a boost">
+      Orders are fulfilled normally as the account ranks up. From Diamond 4 and above, one win is deducted after a promotion if more than one win is still pending, check with admins if you're unsure.
+    </Accordion>
+  </AccordionGroup>
+</Section>
 
-### Solo orders
+<Section id="behavior" title="Behavior">
+  <ul className="list-disc space-y-1.5 pl-5 text-sm text-gray-700 dark:text-zinc-300">
+    <li><strong>Zero tolerance for toxicity</strong>: no flaming, griefing, intentional feeding, begging for tips, or rude behavior toward customers, teammates, or staff.</li>
+    <li><strong>No private boosting or coaching.</strong> Never add a customer on another platform or take work outside LoLBoost.</li>
+    <li>If a customer asks you for private boosting or coaching, <strong>report it immediately</strong> via a Boosting Ticket, don't just decline quietly.</li>
+    <li>Don't message admins privately about work, use Discord Tickets so there's a record.</li>
+  </ul>
+</Section>
 
-| Rule | Details |
-| --- | --- |
-| Start within 30 minutes | Once you claim the order and login details are provided, begin promptly. |
-| Message the customer first | Greet them in the Order Chat, confirm the order details, then start playing. |
-| Stay active | Aim for 7-10 games per day. Fewer than that can count as inactivity. |
-| Continue paused orders | If an order is paused, resume within 14 hours. Longer delays can be penalized. |
+<Section id="account-performance" title="Account & performance">
+  <ul className="mb-6 list-disc space-y-1.5 pl-5 text-sm text-gray-700 dark:text-zinc-300">
+    <li><strong>Finish and notify</strong>: when a boost is done, message the customer and include the Trustpilot review link.</li>
+    <li><strong>Send proof</strong>: screenshots showing the in-game name, current rank, and win/loss record are required for Rank Boost, Win Boost, and Placement orders.</li>
+    <li><strong>Use a working VPN</strong> whenever the order requires it, and keep account activity looking natural.</li>
+  </ul>
 
-### DuoQ orders
+  <p className="mb-2 text-sm font-semibold text-gray-900 dark:text-zinc-50">Dropping an order</p>
+  <p className="mb-3 text-sm text-gray-600 dark:text-zinc-400">
+    Only drop an order if you have a valid Drop Token. Dropping without one, or asking the customer to drop it for you, is a violation (see Fines below).
+  </p>
+  <RuleTable rows={[
+    ["1 win / 0 losses", "Paid in full for progress"],
+    ["1 win / 1 loss", "€20 penalty"],
+    ["1 win / 2 losses", "€20 penalty"],
+  ]} />
+  <p className="mt-3 text-sm text-gray-600 dark:text-zinc-400">
+    Losses with a bad score require compensation games before the order can be considered complete. ACE or good-score losses don't.
+  </p>
+</Section>
 
-| Rule | Details |
-| --- | --- |
-| Schedule through the Order Chat dashboard | Never schedule through the League client or Discord DMs. |
-| Confirm playtimes | If you can't make an agreed time, open a Boosting Ticket early, missing playtimes without notice isn't allowed. |
-| Use a correctly matched account | Your DuoQ account must be within 2 divisions of the customer's rank. |
-| Never use the customer's account for DuoQ | Unless staff has explicitly approved it for that order. |
+<Section id="getting-paid" title="Getting paid">
+  <p className="text-sm text-gray-600 dark:text-zinc-400">
+    Payout schedules and methods are covered in <a href="/partner-center/payouts" className="text-violet-600 dark:text-violet-400 underline">Payouts</a>. Make sure your payout details in the Seller Area are current before requesting a withdrawal.
+  </p>
+  <div className="mt-4">
+    <Card title="Request a payout" icon="wallet" href="https://lolboost.gg/booster-area/payout-requests">
+      Open Payout Requests in the Booster Area to request a withdrawal.
+    </Card>
+  </div>
+</Section>
 
-***
+<Section id="fines" title="Fines">
+  <p className="mb-6 text-sm text-gray-600 dark:text-zinc-400">
+    Fines are deducted directly from your payout. Admins may adjust a decision depending on proof provided and repeated behavior.
+  </p>
 
-## Boosting rules
+  <div className="space-y-8">
+    <FineTier
+      label="Major violations"
+      range="€50-€250"
+      badgeClass="bg-rose-100 text-rose-700 dark:bg-rose-500/10 dark:text-rose-400"
+      rows={[
+        ["Private boosting, coaching, or accepting tips for extra services", "€250"],
+        ["Using bots, scripts, or other third-party programs", "€200"],
+        ["Customer account gets chat banned and admins aren't told immediately", "€100"],
+        ["Sharing Discord, phone number, or other contact info with a customer", "€75"],
+        ["Giving, selling, or passing an order to another booster or platform without approval", "€50"],
+        ["Causing a chat ban on the customer's account", "€50"],
+      ]}
+    />
 
-* Follow every order detail exactly: role, champions, summoner spells, streaming preference, offline mode, Solo Boost vs Hidden Duo, and any other notes on the order.
-* Target at least a **70% winrate** across the boost.
-* Never ask a customer to ignore order details or switch role/champions to make things easier on you.
-* Keep in-game chat to essential shot-calling only.
+    <FineTier
+      label="Standard violations"
+      range="€20-€25"
+      badgeClass="bg-amber-100 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400"
+      rows={[
+        ["Not using a working VPN when required", "€25"],
+        ["Bad behavior in-game or toward a customer", "€25"],
+        ["Buying, using, or changing items on a Solo order account without approval", "€25"],
+        ["Messaging people from the customer's account (Solo only)", "€20"],
+        ["Ignoring order details (champions, role, summoner spells, streaming, offline mode)", "€20"],
+      ]}
+    />
 
-<AccordionGroup>
-  <Accordion title="Win Boost losses">
-    Every loss during a Win Boost requires one additional win to compensate. The order isn't complete until the purchased number of net wins is reached.
-  </Accordion>
-  <Accordion title="Placements">
-    5 placement matches require a 70% winrate. For fewer matches, any shortfall must be compensated with equivalent extra wins.
-  </Accordion>
-  <Accordion title="Promotions during a boost">
-    Orders are fulfilled normally as the account ranks up. From Diamond 4 and above, one win is deducted after a promotion if more than one win is still pending, check with admins if you're unsure.
-  </Accordion>
-</AccordionGroup>
+    <FineTier
+      label="Minor violations"
+      range="€10"
+      badgeClass="bg-sky-100 text-sky-700 dark:bg-sky-500/10 dark:text-sky-400"
+      rows={[
+        ["Not using offline chat mode when required (Solo or DuoQ)", "€10"],
+        ["Dropping an order without a valid Drop Token", "€10"],
+        ["Asking the customer to drop the order for you", "€10"],
+      ]}
+    />
 
-***
+    <FineTier
+      label="Minor operational violations"
+      range="€5"
+      badgeClass="bg-gray-200 text-gray-700 dark:bg-zinc-800 dark:text-zinc-300"
+      rows={[
+        ["Invalid delete-game request", "€5"],
+        ["Skipping the DuoQ account for API tracking on purpose", "€5"],
+        ["Accepting a DuoQ order without a suitable account ready", "€5"],
+        ["Accepting an order without messaging the customer", "€5"],
+        ["Unnecessary delay after accepting an order", "€5"],
+        ["Not sending proof when admins ask for it", "€5"],
+        ["Wrong or missing order status updates", "€5"],
+        ["Ignoring admin instructions on an active order", "€5"],
+      ]}
+    />
+  </div>
+</Section>
 
-## Behavior
-
-* **Zero tolerance for toxicity**: no flaming, griefing, intentional feeding, begging for tips, or rude behavior toward customers, teammates, or staff.
-* **No private boosting or coaching.** Never add a customer on another platform or take work outside LoLBoost.
-* If a customer asks you for private boosting or coaching, **report it immediately** via a Boosting Ticket, don't just decline quietly.
-* Don't message admins privately about work, use Discord Tickets so there's a record.
-
-***
-
-## Account & performance
-
-* **Finish and notify**: when a boost is done, message the customer and include the Trustpilot review link.
-* **Send proof**: screenshots showing the in-game name, current rank, and win/loss record are required for Rank Boost, Win Boost, and Placement orders.
-* **Use a working VPN** whenever the order requires it, and keep account activity looking natural.
-
-### Dropping an order
-
-Only drop an order if you have a valid Drop Token. Dropping without one, or asking the customer to drop it for you, is a violation (see fines below).
-
-| Progress when dropped | Outcome |
-| --- | --- |
-| 1 win / 0 losses | Paid in full for progress |
-| 1 win / 1 loss | €20 penalty |
-| 1 win / 2 losses | €20 penalty |
-
-Losses with a bad score require compensation games before the order can be considered complete. ACE or good-score losses don't.
-
-***
-
-## Getting paid
-
-Payout schedules and methods are covered in [Payouts](/partner-center/payouts). Make sure your payout details in the Seller Area are current before requesting a withdrawal.
-
-***
-
-## Fines
-
-Fines are deducted directly from your payout. Admins may adjust a decision depending on proof provided and repeated behavior.
-
-### Major violations (€50-€250)
-
-| Violation | Fine |
-| --- | --- |
-| Private boosting, coaching, or accepting tips for extra services | €250 |
-| Using bots, scripts, or other third-party programs | €200 |
-| Customer account gets chat banned and admins aren't told immediately | €100 |
-| Sharing Discord, phone number, or other contact info with a customer | €75 |
-| Giving, selling, or passing an order to another booster or platform without approval | €50 |
-| Causing a chat ban on the customer's account | €50 |
-
-### Standard violations (€20-€25)
-
-| Violation | Fine |
-| --- | --- |
-| Not using a working VPN when required | €25 |
-| Bad behavior in-game or toward a customer | €25 |
-| Buying, using, or changing items on a Solo order account without approval | €25 |
-| Messaging people from the customer's account (Solo only) | €20 |
-| Ignoring order details (champions, role, summoner spells, streaming, offline mode) | €20 |
-
-### Minor violations (€10)
-
-| Violation | Fine |
-| --- | --- |
-| Not using offline chat mode when required (Solo or DuoQ) | €10 |
-| Dropping an order without a valid Drop Token | €10 |
-| Asking the customer to drop the order for you | €10 |
-
-### Minor operational violations (€5)
-
-| Violation | Fine |
-| --- | --- |
-| Invalid delete-game request | €5 |
-| Skipping the DuoQ account for API tracking on purpose | €5 |
-| Accepting a DuoQ order without a suitable account ready | €5 |
-| Accepting an order without messaging the customer | €5 |
-| Unnecessary delay after accepting an order | €5 |
-| Not sending proof when admins ask for it | €5 |
-| Wrong or missing order status updates | €5 |
-| Ignoring admin instructions on an active order | €5 |
-
-***
-
-## Where to get help
-
-<CardGroup cols={2}>
-  <Card title="Open a Discord ticket" icon="discord" iconType="brands" href="https://discord.com/channels/926928301807771708/1207383976239702087">
-    For anything unclear, a private boosting request from a customer, or an order issue.
-  </Card>
-  <Card title="Meet the team" icon="users" href="https://discord.com/channels/926928301807771708/1387538352148058206">
-    See who's who on staff before reaching out.
-  </Card>
-</CardGroup>
+<Section id="where-to-get-help" title="Where to get help">
+  <CardGroup cols={2}>
+    <Card title="Open a Discord ticket" icon="discord" iconType="brands" href="https://discord.com/channels/926928301807771708/1207383976239702087">
+      For anything unclear, a private boosting request from a customer, or an order issue.
+    </Card>
+    <Card title="Meet the team" icon="users" href="https://discord.com/channels/926928301807771708/1387538352148058206">
+      See who's who on staff before reaching out.
+    </Card>
+  </CardGroup>
+</Section>
 
 </div>
