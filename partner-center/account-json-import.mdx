@@ -1,0 +1,97 @@
+---
+title: Account JSON import
+description: Import multiple account listings from a JSON file in the Seller Area.
+icon: file-import
+---
+
+# Account JSON import
+
+Use the account JSON import when you want to prepare several account listings at once without creating every listing manually.
+
+<Info>
+Imported accounts first appear as draft rows. They are not published until you review them and click **Import All Accounts**.
+</Info>
+
+## Open the importer
+
+Go to [Seller Area import accounts](https://lolboost.gg/seller-area/import-accounts) and click **New Import**.
+
+## Choose the game
+
+Select the game for the accounts you want to import. The selected game decides which account fields and listing options are available in the import table.
+
+## Upload your JSON file
+
+Click **Load From File** and upload a JSON file with an `accounts` array.
+
+```json
+{
+  "accounts": [
+    {
+      "external_id": "REF-EUW-20260622195635-C04995-001",
+      "title": "EUW Diamond II Account | 79 LP | 60% WR | 50K BE",
+      "slug": "euw-diamond-ii-account-20260622195635-c04995-001",
+      "price": 4999,
+      "rank": 7,
+      "rank_label": "Diamond",
+      "current_rank": 7,
+      "current_division": 2,
+      "current_lp": 79,
+      "flex_rank": 5,
+      "flex_division": 1,
+      "flex_lp": 12,
+      "previous_rank": 6,
+      "previous_division": 1,
+      "previous_lp": 0,
+      "server": "euw",
+      "level_up_method": "by_hand",
+      "level": 30,
+      "blue_essence": 50000,
+      "riot_points": 0,
+      "winrate_percent": 60,
+      "champion_count": 40,
+      "skin_count": 3,
+      "roles": "MidLane|Jungle",
+      "login": "account-login",
+      "password": "account-password",
+      "email": "mail@example.com",
+      "email_password": "mail-password",
+      "in_game_name": "SummonerName#EUW",
+      "2fa": 0,
+      "delivery_instructions": "Change the Riot password and email after purchase. Full email access is included.",
+      "description": "Account details shown to the buyer.",
+      "active": 1
+    }
+  ]
+}
+```
+
+## Review the draft rows
+
+After uploading, the import opens as a review table. Each row starts with the import status **Draft**. This means the row was loaded successfully, but the account listing has not been created yet.
+
+Before importing, you can adjust the listing data, add images, change the listing status, and check the delivery information.
+
+<Warning>
+Make sure the login details, email access, price, region, rank data, and images are correct before importing. Imported listings can become visible to buyers depending on their listing status.
+</Warning>
+
+## Import all accounts
+
+Click **Import All Accounts** after reviewing the rows. Confirm the import when asked.
+
+After the import finishes, each row receives an import result such as **Created**, **Updated**, **Skipped**, or **Failed**. If an account cannot be imported, check the message column for the reason.
+
+## JSON field notes
+
+| Field | Description |
+| --- | --- |
+| `external_id` | Your own unique reference for the account. Use it to avoid duplicates and to update existing listings later. |
+| `title` | Public listing title shown to buyers. |
+| `slug` | URL friendly listing slug. |
+| `price` | Listing price in cents, for example `4999` equals `49.99`. |
+| `server` | Account region, for example `euw`, `na`, or another supported server. |
+| `roles` | Preferred roles separated with `|`, for example `MidLane|Jungle`. |
+| `login`, `password`, `email`, `email_password` | Private account credentials used for delivery. |
+| `2fa` | Use `1` when two factor authentication is enabled, otherwise use `0`. |
+| `active` | Use `1` for active listings and `0` for inactive listings. |

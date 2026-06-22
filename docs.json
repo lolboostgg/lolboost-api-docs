@@ -82,6 +82,7 @@
             "pages": [
               "partner-center/start-selling",
               "partner-center/seller-guide",
+              "partner-center/account-json-import",
               "partner-center/payouts"
             ]
           }
