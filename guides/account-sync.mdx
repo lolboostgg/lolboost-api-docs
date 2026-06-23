@@ -11,6 +11,124 @@ Use `external_id` to map your own account ID to the LoLBoost account.
 
 Call `POST /api/v1/accounts` when you add an account in your own system.
 
+The API accepts the most important listing fields either as top level fields or inside `parameters` / `game_data`. Values from `parameters` are automatically mapped into the public listing fields, so the listing page can display rank, division, Blue Essence, Riot Points, level, win rate, champions, skins and roles.
+
+```json
+{
+  "external_id": "seller-account-123",
+  "title": "EUW Gold Account",
+  "game": "lol",
+  "server": "EUW",
+  "price": 1999,
+  "status": "listed",
+  "parameters": {
+    "rank": "Gold",
+    "division": "II",
+    "flex_rank": "Silver",
+    "flex_division": "I",
+    "level": 80,
+    "blue_essence": 45000,
+    "riot_points": 350,
+    "winrate_percent": 56,
+    "champion_count": 120,
+    "skin_count": 35,
+    "roles": ["mid", "jungle"]
+  },
+  "credentials": {
+    "login": "account-login",
+    "password": "account-password",
+    "email_login": "mail@example.com",
+    "email_password": "mail-password"
+  }
+}
+```
+
+`price` is stored in cents. For example, `1999` means `19.99`. Decimal prices such as `19.99` are also accepted and converted to cents.
+
+## Supported account fields
+
+The following fields can be sent as top level fields or inside `parameters` / `game_data`:
+
+| Public value | Accepted keys |
+| --- | --- |
+| Solo rank | `rank`, `solo_rank`, `current_rank` |
+| Solo division | `division`, `solo_division`, `current_division` |
+| Solo LP | `lp`, `current_lp` |
+| Flex rank | `flex_rank` |
+| Flex division | `flex_division` |
+| Flex LP | `flex_lp` |
+| Previous rank | `previous_rank`, `prev_rank` |
+| Previous division | `previous_division`, `prev_division` |
+| Previous LP | `previous_lp`, `prev_lp` |
+| Level | `level` |
+| Blue Essence | `blue_essence`, `blueEssence`, `be` |
+| Riot Points | `riot_points`, `riotPoints`, `rp` |
+| Win rate | `winrate_percent`, `winrate`, `win_rate` |
+| Champion count | `champion_count`, `champions_count` |
+| Skin count | `skin_count`, `skins_count` |
+| Champions | `champions` |
+| Skins | `skins` |
+| Roles | `roles` |
+| In game name | `in_game_name`, `ign`, `summoner_name` |
+
+## Rank and division values
+
+Rank names are normalized automatically.
+
+| Rank | ID |
+| --- | --- |
+| Unranked | `0` |
+| Iron | `1` |
+| Bronze | `2` |
+| Silver | `3` |
+| Gold | `4` |
+| Platinum, Plat | `5` |
+| Emerald | `6` |
+| Diamond | `7` |
+| Master | `8` |
+| Grandmaster | `9` |
+| Challenger | `10` |
+
+Division values are normalized automatically.
+
+| Division | ID |
+| --- | --- |
+| IV, 4 | `1` |
+| III, 3 | `2` |
+| II, 2 | `3` |
+| I, 1 | `4` |
+
+For League of Legends and TFT accounts, Iron through Diamond use division and no LP. Master, Grandmaster and Challenger use LP and no division. Unranked uses no division and no LP.
+
+## Images
+
+Listings can receive images in two ways.
+
+Use `image_urls` if the images are already hosted somewhere:
+
+```json
+{
+  "external_id": "seller-account-123",
+  "image_urls": [
+    "https://example.com/account-1.png",
+    "https://example.com/account-2.png"
+  ]
+}
+```
+
+Use `image_ids` if you uploaded images into the seller gallery first:
+
+```json
+{
+  "external_id": "seller-account-123",
+  "image_ids": [123, 124]
+}
+```
+
+## Update on LoLBoost
+
+Call `PATCH /api/v1/accounts/{identifier}` with the external ID or LoLBoost ID when account data changes. The same field mapping is used for updates.
+
 ## Save the LoLBoost ID
 
 When LoLBoost returns or sends `lolboost_account_id`, store it in your system.
@@ -22,3 +140,7 @@ Listen for `account.sold` and mark the same account as sold in your own system.
 ## Sold outside LoLBoost
 
 Call `DELETE /api/v1/accounts/{identifier}` with the external ID or LoLBoost ID.
+
+## Rate limits
+
+If you receive `429 Too Many Requests`, slow down requests and retry after a short delay. For bulk creation, use small batches instead of sending many listings at the exact same time.

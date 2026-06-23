@@ -26,6 +26,10 @@
       "description": "Create, list, update, archive and bulk remove item offers."
     },
     {
+      "name": "Images",
+      "description": "Upload, list and delete seller gallery images for listings."
+    },
+    {
       "name": "Webhooks",
       "description": "Webhook payload examples for sync events."
     }
@@ -936,6 +940,243 @@
           }
         }
       }
+    },
+    "/api/v1/images": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "summary": "List seller gallery images",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "example": 30
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Image"
+                      }
+                    },
+                    "meta": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Images"
+        ],
+        "summary": "Upload seller gallery image",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "description": "Use either file or image as the multipart field name."
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Image"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/images/{id}": {
+      "delete": {
+        "tags": [
+          "Images"
+        ],
+        "summary": "Delete seller gallery image",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "deleted_id": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -995,6 +1236,109 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "example": "Hand leveled EUW account."
+          },
+          "current_rank": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "Gold"
+          },
+          "current_division": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "II"
+          },
+          "current_lp": {
+            "type": "integer",
+            "example": 120
+          },
+          "flex_rank": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "Silver"
+          },
+          "flex_division": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "I"
+          },
+          "flex_lp": {
+            "type": "integer",
+            "example": 75
+          },
+          "level": {
+            "type": "integer",
+            "example": 80
+          },
+          "blue_essence": {
+            "type": "integer",
+            "example": 45000
+          },
+          "riot_points": {
+            "type": "integer",
+            "example": 350
+          },
+          "winrate_percent": {
+            "type": "integer",
+            "example": 56
+          },
+          "champion_count": {
+            "type": "integer",
+            "example": 120
+          },
+          "skin_count": {
+            "type": "integer",
+            "example": 35
+          },
+          "image_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": [
+              123,
+              124
+            ]
+          },
+          "image_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "https://example.com/account.png"
+            ]
+          },
+          "game_data": {
+            "type": "object",
+            "nullable": true
           }
         }
       },
@@ -1023,8 +1367,16 @@
             "example": "EUW"
           },
           "price": {
-            "type": "integer",
-            "example": 4999
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "example": 1999,
+            "description": "Price in cents. Decimal prices such as 19.99 are accepted and converted to cents."
           },
           "status": {
             "type": "string",
@@ -1032,13 +1384,229 @@
           },
           "parameters": {
             "type": "object",
+            "description": "Account details are stored and mapped into listing fields.",
             "example": {
-              "level": 30,
-              "rank": "Diamond"
+              "rank": "Gold",
+              "division": "II",
+              "flex_rank": "Silver",
+              "flex_division": "I",
+              "level": 80,
+              "blue_essence": 45000,
+              "riot_points": 350,
+              "winrate_percent": 56,
+              "champion_count": 120,
+              "skin_count": 35
             }
           },
           "credentials": {
             "$ref": "#/components/schemas/AccountCredentials"
+          },
+          "description": {
+            "type": "string",
+            "example": "Hand leveled EUW account."
+          },
+          "rank": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "Gold",
+            "description": "Alias for solo/current rank. Accepts names or IDs."
+          },
+          "division": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "II",
+            "description": "Alias for solo/current division. Accepts I, II, III, IV or IDs."
+          },
+          "current_rank": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "Gold"
+          },
+          "current_division": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "II"
+          },
+          "current_lp": {
+            "type": "integer",
+            "example": 120
+          },
+          "flex_rank": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "Silver"
+          },
+          "flex_division": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "I"
+          },
+          "flex_lp": {
+            "type": "integer",
+            "example": 75
+          },
+          "previous_rank": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "Platinum"
+          },
+          "previous_division": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "IV"
+          },
+          "previous_lp": {
+            "type": "integer",
+            "example": 20
+          },
+          "level": {
+            "type": "integer",
+            "example": 80
+          },
+          "blue_essence": {
+            "type": "integer",
+            "example": 45000
+          },
+          "riot_points": {
+            "type": "integer",
+            "example": 350
+          },
+          "winrate_percent": {
+            "type": "integer",
+            "example": 56
+          },
+          "champion_count": {
+            "type": "integer",
+            "example": 120
+          },
+          "skin_count": {
+            "type": "integer",
+            "example": 35
+          },
+          "champions": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "example": [
+              "Ahri",
+              "Lee Sin"
+            ]
+          },
+          "skins": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "example": [
+              "Star Guardian Ahri"
+            ]
+          },
+          "roles": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "example": [
+              "mid",
+              "jungle"
+            ]
+          },
+          "in_game_name": {
+            "type": "string",
+            "example": "SummonerName"
+          },
+          "image_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": [
+              123,
+              124
+            ]
+          },
+          "image_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "https://example.com/account.png"
+            ]
+          },
+          "game_data": {
+            "type": "object",
+            "description": "Alias for parameters. Account details from game_data are mapped the same way as parameters."
           }
         }
       },
@@ -1049,21 +1617,246 @@
             "type": "string"
           },
           "price": {
-            "type": "integer",
-            "example": 5999
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "example": 1999,
+            "description": "Price in cents. Decimal prices such as 19.99 are accepted and converted to cents."
           },
           "status": {
             "type": "string",
             "example": "listed"
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "example": "Hand leveled EUW account."
           },
           "parameters": {
-            "type": "object"
+            "type": "object",
+            "description": "Account details are stored and mapped into listing fields.",
+            "example": {
+              "rank": "Gold",
+              "division": "II",
+              "flex_rank": "Silver",
+              "flex_division": "I",
+              "level": 80,
+              "blue_essence": 45000,
+              "riot_points": 350,
+              "winrate_percent": 56,
+              "champion_count": 120,
+              "skin_count": 35
+            }
           },
           "credentials": {
             "$ref": "#/components/schemas/AccountCredentials"
+          },
+          "rank": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "Gold",
+            "description": "Alias for solo/current rank. Accepts names or IDs."
+          },
+          "division": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "II",
+            "description": "Alias for solo/current division. Accepts I, II, III, IV or IDs."
+          },
+          "current_rank": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "Gold"
+          },
+          "current_division": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "II"
+          },
+          "current_lp": {
+            "type": "integer",
+            "example": 120
+          },
+          "flex_rank": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "Silver"
+          },
+          "flex_division": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "I"
+          },
+          "flex_lp": {
+            "type": "integer",
+            "example": 75
+          },
+          "previous_rank": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "Platinum"
+          },
+          "previous_division": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "example": "IV"
+          },
+          "previous_lp": {
+            "type": "integer",
+            "example": 20
+          },
+          "level": {
+            "type": "integer",
+            "example": 80
+          },
+          "blue_essence": {
+            "type": "integer",
+            "example": 45000
+          },
+          "riot_points": {
+            "type": "integer",
+            "example": 350
+          },
+          "winrate_percent": {
+            "type": "integer",
+            "example": 56
+          },
+          "champion_count": {
+            "type": "integer",
+            "example": 120
+          },
+          "skin_count": {
+            "type": "integer",
+            "example": 35
+          },
+          "champions": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "example": [
+              "Ahri",
+              "Lee Sin"
+            ]
+          },
+          "skins": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "example": [
+              "Star Guardian Ahri"
+            ]
+          },
+          "roles": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "example": [
+              "mid",
+              "jungle"
+            ]
+          },
+          "in_game_name": {
+            "type": "string",
+            "example": "SummonerName"
+          },
+          "image_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": [
+              123,
+              124
+            ]
+          },
+          "image_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "https://example.com/account.png"
+            ]
+          },
+          "game_data": {
+            "type": "object",
+            "description": "Alias for parameters. Account details from game_data are mapped the same way as parameters."
           }
         }
       },
@@ -1304,6 +2097,43 @@
           "sold_at": {
             "type": "string",
             "example": "2026-06-19 15:30:00"
+          }
+        }
+      },
+      "Image": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 123
+          },
+          "image_id": {
+            "type": "integer",
+            "example": 123
+          },
+          "url": {
+            "type": "string",
+            "example": "https://lolboost.gg/public/uploads/accounts-gallery/example.png"
+          },
+          "filename": {
+            "type": "string",
+            "nullable": true
+          },
+          "original_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "mime_type": {
+            "type": "string",
+            "example": "image/png"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "integer",
+            "nullable": true
           }
         }
       }

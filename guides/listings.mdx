@@ -4,4 +4,41 @@ description: Manage seller listings.
 icon: list
 ---
 
+# Listings
+
 Create clear titles, accurate descriptions, correct prices, and keep stock synchronized to prevent double sales.
+
+## Account listing fields
+
+For account listings, `POST /api/v1/accounts` and `PATCH /api/v1/accounts/{identifier}` support account details as top level fields or inside `parameters` / `game_data`.
+
+Recommended keys include `rank`, `division`, `flex_rank`, `flex_division`, `level`, `blue_essence`, `riot_points`, `winrate_percent`, `champion_count`, `skin_count`, `champions`, `skins`, `roles` and `in_game_name`.
+
+```json
+{
+  "external_id": "seller-account-123",
+  "title": "EUW Gold Account",
+  "price": 1999,
+  "parameters": {
+    "rank": "Gold",
+    "division": "II",
+    "level": 80,
+    "blue_essence": 45000,
+    "riot_points": 350,
+    "champion_count": 120,
+    "skin_count": 35
+  }
+}
+```
+
+## Listing images
+
+Attach existing image URLs with `image_urls`, or attach previously uploaded seller gallery images with `image_ids`.
+
+```json
+{
+  "external_id": "seller-account-123",
+  "image_urls": ["https://example.com/account.png"],
+  "image_ids": [123]
+}
+```

@@ -105,6 +105,7 @@
             "group": "Sync workflows",
             "pages": [
               "guides/account-sync",
+              "guides/listings",
               "guides/item-sync",
               "guides/bulk-stock-update"
             ]
