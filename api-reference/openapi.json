@@ -200,6 +200,27 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/AccountCreateRequest"
+              },
+              "examples": {
+                "createAccountWithUploadedImages": {
+                  "summary": "Create account with uploaded image IDs",
+                  "value": {
+                    "external_id": "seller-account-123",
+                    "title": "EUW Iron IV Account",
+                    "price": 19.99,
+                    "login": "account-login",
+                    "password": "account-password",
+                    "ign": "SummonerName",
+                    "parameters": {
+                      "rank": "Iron IV",
+                      "level": 30,
+                      "blue_essence": 25000
+                    },
+                    "image_ids": [
+                      123
+                    ]
+                  }
+                }
               }
             }
           }
@@ -1050,7 +1071,7 @@
                     "format": "binary"
                   }
                 },
-                "description": "Use either file or image as the multipart field name."
+                "description": "Use either file or image as the multipart field name. Example curl: curl -X POST https://lolboost.gg/api/v1/images -H \"Authorization: Bearer YOUR_API_KEY\" -F \"file=@/path/to/account-image.png\""
               }
             }
           }
@@ -1066,6 +1087,15 @@
                     "data": {
                       "$ref": "#/components/schemas/Image"
                     }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 123,
+                    "image_id": 123,
+                    "url": "https://lolboost.gg/public/uploads/accounts-gallery/account-image.png",
+                    "filename": "account-image.png",
+                    "mime_type": "image/png"
                   }
                 }
               }
@@ -1101,7 +1131,8 @@
               }
             }
           }
-        }
+        },
+        "description": "Upload a seller gallery image. The returned id or image_id can be attached to an account via image_ids."
       }
     },
     "/api/v1/images/{id}": {
@@ -1384,18 +1415,16 @@
           },
           "parameters": {
             "type": "object",
-            "description": "Account details are stored and mapped into listing fields.",
+            "description": "Account details are stored and mapped into public listing fields. Rank and division can be sent separately or together, for example rank: Iron IV.",
             "example": {
-              "rank": "Gold",
-              "division": "II",
-              "flex_rank": "Silver",
-              "flex_division": "I",
-              "level": 80,
-              "blue_essence": 45000,
+              "rank": "Iron IV",
+              "flex_rank": "Silver I",
+              "level": 30,
+              "blue_essence": 25000,
               "riot_points": 350,
               "winrate_percent": 56,
-              "champion_count": 120,
-              "skin_count": 35
+              "champion_count": 45,
+              "skin_count": 8
             }
           },
           "credentials": {
@@ -1414,8 +1443,8 @@
                 "type": "integer"
               }
             ],
-            "example": "Gold",
-            "description": "Alias for solo/current rank. Accepts names or IDs."
+            "example": "Iron IV",
+            "description": "Alias for solo/current rank. Accepts names, IDs, or combined rank and division values such as Iron IV, Gold II, Platinum_III or diamond-1."
           },
           "division": {
             "oneOf": [
@@ -1586,14 +1615,36 @@
             "example": "SummonerName"
           },
           "image_ids": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            },
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "image_id": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            ],
             "example": [
               123,
               124
-            ]
+            ],
+            "description": "Attach images previously uploaded through POST /api/v1/images. Accepts [123], \"123,124\", [{\"id\":123}] or [{\"image_id\":123}]."
           },
           "image_urls": {
             "type": "array",

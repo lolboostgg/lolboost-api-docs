@@ -14,31 +14,101 @@ For account listings, `POST /api/v1/accounts` and `PATCH /api/v1/accounts/{ident
 
 Recommended keys include `rank`, `division`, `flex_rank`, `flex_division`, `level`, `blue_essence`, `riot_points`, `winrate_percent`, `champion_count`, `skin_count`, `champions`, `skins`, `roles` and `in_game_name`.
 
+You can send rank and division separately, or together as one value.
+
 ```json
 {
   "external_id": "seller-account-123",
-  "title": "EUW Gold Account",
+  "title": "EUW Iron IV Account",
   "price": 1999,
   "parameters": {
-    "rank": "Gold",
-    "division": "II",
-    "level": 80,
-    "blue_essence": 45000,
+    "rank": "Iron IV",
+    "level": 30,
+    "blue_essence": 25000,
     "riot_points": 350,
-    "champion_count": 120,
-    "skin_count": 35
+    "champion_count": 45,
+    "skin_count": 8
+  }
+}
+```
+
+This is also valid:
+
+```json
+{
+  "parameters": {
+    "rank": "Gold",
+    "division": "II"
   }
 }
 ```
 
 ## Listing images
 
-Attach existing image URLs with `image_urls`, or attach previously uploaded seller gallery images with `image_ids`.
+Images are uploaded first, then attached to the account listing with `image_ids`.
+
+### 1. Upload an image
+
+Send a multipart request to `POST /api/v1/images`. Use `file` as the multipart field name. `image` is also accepted.
+
+```bash
+curl -X POST "https://lolboost.gg/api/v1/images" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -F "file=@/path/to/account-image.png"
+```
+
+Example response:
+
+```json
+{
+  "data": {
+    "id": 123,
+    "image_id": 123,
+    "url": "https://lolboost.gg/public/uploads/accounts-gallery/account-image.png"
+  }
+}
+```
+
+Use the returned `id` or `image_id` in the next account request.
+
+### 2. Attach images to an account
 
 ```json
 {
   "external_id": "seller-account-123",
-  "image_urls": ["https://example.com/account.png"],
+  "title": "EUW Iron IV Account",
+  "price": 1999,
   "image_ids": [123]
+}
+```
+
+Multiple images are supported:
+
+```json
+{
+  "image_ids": [123, 124, 125]
+}
+```
+
+For compatibility, `image_ids` can also be sent as a comma separated string or as objects:
+
+```json
+{
+  "image_ids": "123,124,125"
+}
+```
+
+```json
+{
+  "image_ids": [{ "id": 123 }, { "image_id": 124 }]
+}
+```
+
+If your images are already hosted somewhere public, you can use `image_urls` instead:
+
+```json
+{
+  "external_id": "seller-account-123",
+  "image_urls": ["https://example.com/account.png"]
 }
 ```

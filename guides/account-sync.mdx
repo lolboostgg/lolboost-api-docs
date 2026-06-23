@@ -22,8 +22,7 @@ The API accepts the most important listing fields either as top level fields or 
   "price": 1999,
   "status": "listed",
   "parameters": {
-    "rank": "Gold",
-    "division": "II",
+    "rank": "Gold II",
     "flex_rank": "Silver",
     "flex_division": "I",
     "level": 80,
@@ -73,7 +72,7 @@ The following fields can be sent as top level fields or inside `parameters` / `g
 
 ## Rank and division values
 
-Rank names are normalized automatically.
+Rank names are normalized automatically. You can send rank and division separately, for example `rank: "Gold"` and `division: "II"`, or together as one value, for example `rank: "Gold II"`, `Iron IV`, `Platinum_III` or `diamond-1`.
 
 | Rank | ID |
 | --- | --- |
@@ -102,9 +101,71 @@ For League of Legends and TFT accounts, Iron through Diamond use division and no
 
 ## Images
 
-Listings can receive images in two ways.
+Images are uploaded first, then attached to the account listing with `image_ids`.
 
-Use `image_urls` if the images are already hosted somewhere:
+### 1. Upload an image
+
+Send a multipart request to `POST /api/v1/images`. Use `file` as the multipart field name. `image` is also accepted.
+
+```bash
+curl -X POST "https://lolboost.gg/api/v1/images" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -F "file=@/path/to/account-image.png"
+```
+
+Example response:
+
+```json
+{
+  "data": {
+    "id": 123,
+    "image_id": 123,
+    "url": "https://lolboost.gg/public/uploads/accounts-gallery/account-image.png"
+  }
+}
+```
+
+Use the returned `id` or `image_id` in the account create or update request.
+
+### 2. Attach images with image_ids
+
+```json
+{
+  "external_id": "seller-account-123",
+  "title": "EUW Iron IV Account",
+  "price": 1999,
+  "parameters": {
+    "rank": "Iron IV",
+    "level": 30,
+    "blue_essence": 25000
+  },
+  "image_ids": [123]
+}
+```
+
+Multiple images are supported:
+
+```json
+{
+  "image_ids": [123, 124, 125]
+}
+```
+
+For compatibility, `image_ids` can also be sent as a comma separated string or as objects:
+
+```json
+{
+  "image_ids": "123,124,125"
+}
+```
+
+```json
+{
+  "image_ids": [{ "id": 123 }, { "image_id": 124 }]
+}
+```
+
+If your images are already hosted somewhere public, you can use `image_urls` instead:
 
 ```json
 {
@@ -113,15 +174,6 @@ Use `image_urls` if the images are already hosted somewhere:
     "https://example.com/account-1.png",
     "https://example.com/account-2.png"
   ]
-}
-```
-
-Use `image_ids` if you uploaded images into the seller gallery first:
-
-```json
-{
-  "external_id": "seller-account-123",
-  "image_ids": [123, 124]
 }
 ```
 
